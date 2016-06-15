@@ -6,9 +6,29 @@
     <title>CloakMD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="GitHub flavored markdown notes with a twist">
+
+    <script src="assets/vendors/angular/angular.js"></script>
+    <script src="assets/vendors/angular-aria/angular-aria.js"></script>
+    <script src="assets/vendors/angular-animate/angular-animate.js"></script>
+    <script src="assets/vendors/angular-messages/angular-messages.js"></script>
+    <script src="assets/vendors/angular-material/angular-material.js"></script>
+    <script src="assets/vendors/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <script src="app/app.js"></script>
+
+    <script src="app/main/main.js"></script>
+    <script src="app/main/main-service.js"></script>
+    <script src="app/main/main-controller.js"></script>
+
+    <link rel="stylesheet" href="assets/vendors/angular-material/angular-material.css">
+    <link rel="stylesheet" href="assets/styles/css/main.css">
   </head>
 
-  <body>
-    <h1>CloakMD</h1>
+  <body ng-app="cloakmd" ng-controller="appCtrl">
+    <div class="content">
+      <div class="content-wrapper">
+        <div ui-view></div>
+      </div>
+    </div>
   </body>
 </html>
