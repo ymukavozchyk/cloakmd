@@ -10,11 +10,12 @@
   "dependencies": {
     "express": "*",
     "compression": "*",
+    "gulp": "*",
+    "gulp-sass": "*",
     "bower": "*"
   },
   "devDependencies": {
     "morgan": "*",
-    "gulp": "*",
     "gulp-nodemon": "*",
     "browser-sync": "*"
   }
