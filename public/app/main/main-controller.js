@@ -6,7 +6,7 @@ angular.module('main')
 
       this.source =
       '# CloakMD\n' +
-      'GitHub flavored markdown notes\n';
+      'GitHub flavored markdown notes with a &&twist&&\n';
 
       this.aceLoaded = function(editor){
 
