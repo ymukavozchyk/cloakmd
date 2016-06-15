@@ -1,1 +1,8 @@
-<h2>Main View</h2>
+<div layout="row">
+  <div flex>
+      <div ui-ace="{ onLoad : MainCtrl.aceLoaded }" ng-model="MainCtrl.source"></div>
+  </div>
+  <div flex>
+       <p class="markdown-body" markdown-to-html="MainCtrl.source"></p>
+  </div>
+</div>

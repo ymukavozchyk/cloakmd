@@ -5,6 +5,9 @@
   "dependencies": {
     "angular": "latest",
     "angular-ui-router": "latest",
-    "angular-material": "latest"
+    "angular-material": "latest",
+    "ng-showdown": "latest",
+    "angular-ui-ace": "latest",
+    "github-markdown-css": "latest"
   }
 }
