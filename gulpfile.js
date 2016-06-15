@@ -5,7 +5,7 @@ var sass  = require('gulp-sass');
 
 
 gulp.task('default', ['browser-sync'], function () {
-  gulp.watch('public/assets/styles/scss/**/*.scss', ['sass']);
+  gulp.watch('public/assets/styles/scss/**/*.scss', ['build']);
 });
 
 gulp.task('browser-sync', ['nodemon'], function() {
