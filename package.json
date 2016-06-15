@@ -18,5 +18,9 @@
     "morgan": "*",
     "gulp-nodemon": "*",
     "browser-sync": "*"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "postinstall": "bower install && gulp build"
   }
 }

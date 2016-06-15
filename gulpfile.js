@@ -4,10 +4,7 @@ var gulp  = require('gulp');
 var sass  = require('gulp-sass');
 
 
-gulp.task('default', ['sass'], function () {
-});
-
-gulp.task('dev', ['browser-sync'], function () {
+gulp.task('default', ['browser-sync'], function () {
   gulp.watch('public/assets/styles/scss/**/*.scss', ['sass']);
 });
 
@@ -37,7 +34,7 @@ gulp.task('sass-dev', function () {
     }));
 });
 
-gulp.task('sass', function () {
+gulp.task('build', function () {
   return gulp.src('public/assets/styles/scss/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('public/assets/styles/css'));
