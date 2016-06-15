@@ -34,7 +34,8 @@
   </head>
 
   <body ng-app="cloakmd" ng-controller="appCtrl">
-    <div class="content">
+    <div class="loader" ng-hide="loaded"></div>
+    <div class="content" ng-cloak ng-show="loaded">
       <div class="content-wrapper">
         <div ui-view></div>
       </div>
