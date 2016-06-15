@@ -1,0 +1,21 @@
+{
+  "name": "cloakmd",
+  "description": "GitHub flavored markdown notes with a twist",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ymukavozchyk/cloakmd-client"
+  },
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "*",
+    "compression": "*",
+    "bower": "*"
+  },
+  "devDependencies": {
+    "morgan": "*",
+    "gulp": "*",
+    "gulp-nodemon": "*",
+    "browser-sync": "*"
+  }
+}
