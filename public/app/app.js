@@ -5,6 +5,7 @@ angular.module('cloakmd', [
   'ui.ace',
   'ngSanitize',
   'ng-showdown',
+  'LocalStorageModule',
   'main'
 ])
   .config(['$showdownProvider', function($showdownProvider){

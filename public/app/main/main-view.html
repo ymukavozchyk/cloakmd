@@ -1,6 +1,6 @@
 <div layout="row">
   <div flex>
-      <div ui-ace="{ onLoad : MainCtrl.aceLoaded }" ng-model="MainCtrl.source"></div>
+      <div ui-ace="{ onLoad: MainCtrl.aceLoaded, onChange: MainCtrl.aceChanged }" ng-model="MainCtrl.source"></div>
   </div>
   <div flex>
        <p class="markdown-body" markdown-to-html="MainCtrl.source"></p>

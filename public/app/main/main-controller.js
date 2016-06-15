@@ -1,12 +1,14 @@
 angular.module('main')
-  .controller('MainPageController', ['$scope', 'MainPageService', function ($scope, MainPageService) {
+  .controller('MainPageController', ['$scope', 'localStorageService', 'MainPageService', function ($scope, localStorageService, MainPageService) {
       console.info('Main Page Controller is online');
 
       var vm = this;
 
-      this.source =
+      var sample =
       '# CloakMD\n' +
       'GitHub flavored markdown notes with a &&twist&&\n';
+
+      this.source = localStorageService.get('source') || sample;
 
       this.aceLoaded = function(editor){
 
@@ -25,6 +27,10 @@ angular.module('main')
         session.setUseWrapMode(true);
 
         editor.focus();
+      };
+
+      this.aceChanged = function(){
+        localStorageService.set('source', vm.source);
       };
     }
   ]);
