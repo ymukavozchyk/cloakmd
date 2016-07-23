@@ -1,7 +1,5 @@
 angular.module('cloakmd', [
   'ui.router',
-  'ngMaterial',
-  'ngMessages',
   'ui.ace',
   'ngSanitize',
   'ng-showdown',
