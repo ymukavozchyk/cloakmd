@@ -1,6 +1,7 @@
 angular.module('cloakmd', [
   'ui.router',
   'ui.ace',
+  'ui.bootstrap',
   'ngSanitize',
   'ng-showdown',
   'LocalStorageModule',

@@ -1,8 +1,8 @@
-<div layout="row">
-  <div flex>
+<div class="row">
+  <div class="col-md-6">
       <div ui-ace="{ onLoad: MainCtrl.aceLoaded, onChange: MainCtrl.aceChanged }" ng-model="MainCtrl.source"></div>
   </div>
-  <div flex>
+  <div class="col-md-6">
        <p class="markdown-body" markdown-to-html="MainCtrl.source"></p>
   </div>
 </div>
