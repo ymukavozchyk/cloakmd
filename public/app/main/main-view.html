@@ -1,8 +1,48 @@
-<div class="row">
-  <div class="col-md-6">
-      <div ui-ace="{ onLoad: MainCtrl.aceLoaded, onChange: MainCtrl.aceChanged }" ng-model="MainCtrl.source"></div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+        aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <span class="navbar-title">CloakMD</span>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-left">
+        <li><a href="#" ng-click="MainCtrl.addNewNote()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Note</a></li>
+        <li><a href="#" ng-click="MainCtrl.removeCurrentNote()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove Note</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Publish</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="col-md-6">
-       <p class="markdown-body" markdown-to-html="MainCtrl.source"></p>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li ng-repeat="note in MainCtrl.notes" ng-class="{ active: $index == MainCtrl.index }">
+          <a ng-click="MainCtrl.selectNote(note)" href="#">{{ note.title }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <div class="row note-title">
+        <div class="col-md-12">
+          <input class="form-control" type="text" ng-model="MainCtrl.note.title" ng-change="MainCtrl.titleChanged()">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div ui-ace="{ onLoad: MainCtrl.aceLoaded, onChange: MainCtrl.aceChanged }" ng-model="MainCtrl.note.data"></div>
+        </div>
+        <div class="col-md-6">
+          <p class="markdown-body" markdown-to-html="MainCtrl.note.data"></p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

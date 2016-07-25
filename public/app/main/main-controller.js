@@ -1,36 +1,79 @@
 angular.module('main')
   .controller('MainPageController', ['$scope', 'localStorageService', 'MainPageService', function ($scope, localStorageService, MainPageService) {
-      console.info('Main Page Controller is online');
+    console.info('Main Page Controller is online');
 
-      var vm = this;
+    var vm = this;
 
-      var sample =
+    var sampleData =
       '# CloakMD\n' +
       'GitHub flavored markdown notes with a &&twist&&\n';
 
-      this.source = localStorageService.get('source') || sample;
+    var sampleNotes = [{
+      title: 'Untitled',
+      data: sampleData
+    }];
 
-      this.aceLoaded = function(editor){
+    this.notes = localStorageService.get('notes') || sampleNotes;
+    this.index = 0;
+    this.note = this.notes[0];
 
-        var session = editor.getSession();
-        var renderer = editor.renderer;
+    this.aceLoaded = function (editor) {
 
-        editor.setTheme('ace/theme/github');
-        editor.setHighlightActiveLine(true);
-        editor.setShowPrintMargin(false);
-        editor.setOption("scrollPastEnd", false);
+      var session = editor.getSession();
+      var renderer = editor.renderer;
 
-        session.setMode('ace/mode/markdown');
-        session.setFoldStyle('markbegin');
-        session.setTabSize(4);
-        session.setUseSoftTabs(true);
-        session.setUseWrapMode(true);
+      editor.setTheme('ace/theme/github');
+      editor.setHighlightActiveLine(true);
+      editor.setShowPrintMargin(false);
+      editor.setOption("scrollPastEnd", false);
 
-        editor.focus();
+      session.setMode('ace/mode/markdown');
+      session.setFoldStyle('markbegin');
+      session.setTabSize(4);
+      session.setUseSoftTabs(true);
+      session.setUseWrapMode(true);
+
+      editor.focus();
+    };
+
+    this.aceChanged = function () {
+      vm.notes[vm.index] = vm.note;
+      localStorageService.set('notes', vm.notes);
+    };
+
+    this.titleChanged = function () {
+      if(vm.note.title == ''){
+        vm.note.title = 'Untitled';
+      }
+      vm.notes[vm.index] = vm.note;
+      localStorageService.set('notes', vm.notes);
+    };
+
+    this.addNewNote = function () {
+      var newNote = {
+        title: 'Untitled',
+        data: ''
       };
+      vm.notes.push(newNote);
 
-      this.aceChanged = function(){
-        localStorageService.set('source', vm.source);
-      };
+      vm.index = vm.notes.indexOf(newNote);
+      vm.note = newNote;
+    };
+
+    this.removeCurrentNote = function () {
+      vm.notes.splice(vm.index, 1);
+      if (vm.notes.length > 0) {
+        vm.selectNote(vm.notes[vm.notes.length - 1]);
+      }
+      else {
+        vm.addNewNote();
+      }
+      localStorageService.set('notes', vm.notes);
     }
+
+    this.selectNote = function (note) {
+      vm.index = vm.notes.indexOf(note);
+      vm.note = note;
+    }
+  }
   ]);
