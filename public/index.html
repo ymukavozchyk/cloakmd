@@ -12,9 +12,7 @@
 
   <body ng-app="cloakmd" ng-controller="appCtrl">
     <div class="loader" ng-hide="loaded"></div>
-    <div class="container-fluid" ng-cloak ng-show="loaded">
-      <div ui-view></div>
-    </div>
+    <div ui-view ng-cloak ng-show="loaded"></div>
 
     <link rel="stylesheet" href="assets/vendors/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="assets/vendors/github-markdown-css/github-markdown.css">

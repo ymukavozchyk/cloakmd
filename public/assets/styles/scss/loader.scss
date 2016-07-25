@@ -1,7 +1,9 @@
+$loader_color: #101010;
+
 .loader,
 .loader:before,
 .loader:after {
-  background: rgba(255, 255, 102, 1);
+  background: $loader_color;
   -webkit-animation: load1 1s infinite ease-in-out;
   animation: load1 1s infinite ease-in-out;
   width: 1em;
@@ -19,7 +21,7 @@
   animation-delay: -0.32s;
 }
 .loader {
-  color: rgba(255, 255, 102, 1);
+  color: $loader_color;
   text-indent: -9999em;
   margin: 88px auto;
   position: relative;
