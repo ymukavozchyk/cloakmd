@@ -42,12 +42,17 @@ angular.module('main')
     };
 
     this.titleChanged = function () {
-      if(vm.note.title == ''){
-        vm.note.title = 'Untitled';
-      }
       vm.notes[vm.index] = vm.note;
       localStorageService.set('notes', vm.notes);
     };
+
+    this.titleBlur = function(){
+      if(vm.note.title == ''){
+        vm.note.title = 'Untitled';
+        vm.notes[vm.index] = vm.note;
+        localStorageService.set('notes', vm.notes);
+      }
+    }
 
     this.addNewNote = function () {
       var newNote = {

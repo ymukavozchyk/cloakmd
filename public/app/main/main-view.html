@@ -32,7 +32,7 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <div class="row note-title">
         <div class="col-md-12">
-          <input class="form-control" type="text" ng-model="MainCtrl.note.title" ng-change="MainCtrl.titleChanged()">
+          <input class="form-control" type="text" ng-model="MainCtrl.note.title" ng-change="MainCtrl.titleChanged()" ng-blur="MainCtrl.titleBlur()">
         </div>
       </div>
       <div class="row">
