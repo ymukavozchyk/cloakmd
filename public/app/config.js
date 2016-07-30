@@ -1,2 +1,2 @@
 angular.module('config', [])
-.constant('API_URL', 'http://cloakmd.azurewebsites.net/api');
+.constant('API_URL', 'https://cloakmd.azurewebsites.net/api');
