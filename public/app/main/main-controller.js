@@ -1,5 +1,5 @@
 angular.module('main')
-  .controller('MainPageController', ['$scope', 'localStorageService', 'MainPageService', function ($scope, localStorageService, MainPageService) {
+  .controller('MainPageController', ['$scope', 'localStorageService', 'toaster', 'MainPageService', function ($scope, localStorageService, toaster, MainPageService) {
     console.info('Main Page Controller is online');
 
     var vm = this;
@@ -88,8 +88,19 @@ angular.module('main')
       vm.note.publicKey = "sample_public_key";
       vm.note.privateKey = "sample_private_key";
       vm.note.expirationDate = new Date();
-
       localStorageService.set('notes', vm.notes);
+    }
+
+    this.sayHelloToApi = function () {
+      MainPageService.helloApi()
+      .then(
+        function success(res) {
+          toaster.pop('success', 'Hello from API', res.Message);
+        },
+        function error(err){
+          toaster.pop('success', 'Hello from API', err || 'Was not able to say hello to API');
+        }
+      );
     }
   }
   ]);

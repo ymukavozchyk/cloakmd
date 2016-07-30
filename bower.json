@@ -10,6 +10,7 @@
     "github-markdown-css": "latest",
     "angular-local-storage": "latest",
     "angular-bootstrap": "latest",
-    "bootstrap": "latest"
+    "bootstrap": "latest",
+    "angularjs-toaster": "latest"
   }
 }

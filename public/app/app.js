@@ -4,7 +4,10 @@ angular.module('cloakmd', [
   'ui.bootstrap',
   'ngSanitize',
   'ng-showdown',
+  'ngAnimate',
+  'toaster',
   'LocalStorageModule',
+  'config',
   'main'
 ])
   .config(['$showdownProvider', function($showdownProvider){

@@ -16,6 +16,7 @@
         <li><a href="#" ng-click="MainCtrl.removeCurrentNote()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove Note</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" ng-click="MainCtrl.sayHelloToApi()"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Say Hello to API</a></li>
         <li ng-hide="MainCtrl.note.expirationDate"><a href="#" ng-click="MainCtrl.publishNote()"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Publish</a></li>
         <li ng-hide="!MainCtrl.note.expirationDate"><a href="#"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Public Link</a></li>
         <li ng-hide="!MainCtrl.note.expirationDate"><a href="#"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Private Link</a></li>
