@@ -14,7 +14,11 @@
       <ul class="nav navbar-nav navbar-left">
         <li><a href="#" ng-click="MainCtrl.addNewNote()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Note</a></li>
         <li><a href="#" ng-click="MainCtrl.removeCurrentNote()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove Note</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Publish</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-hide="MainCtrl.note.expirationDate"><a href="#" ng-click="MainCtrl.publishNote()"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Publish</a></li>
+        <li ng-hide="!MainCtrl.note.expirationDate"><a href="#"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Public Link</a></li>
+        <li ng-hide="!MainCtrl.note.expirationDate"><a href="#"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Private Link</a></li>
       </ul>
     </div>
   </div>
@@ -25,7 +29,11 @@
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
         <li ng-repeat="note in MainCtrl.notes" ng-class="{ active: $index == MainCtrl.index }">
-          <a ng-click="MainCtrl.selectNote(note)" href="#">{{ note.title }}</a>
+          <a ng-click="MainCtrl.selectNote(note)" href="#">
+            <span class="glyphicon glyphicon-asterisk" aria-hidden="true" ng-hide="note.expirationDate"></span>
+            <span class="glyphicon glyphicon-cloud" aria-hidden="true" ng-hide="!note.expirationDate"></span> {{ note.title
+            }}
+          </a>
         </li>
       </ul>
     </div>
