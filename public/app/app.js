@@ -10,9 +10,6 @@ angular.module('cloakmd', [
   'config',
   'main'
 ])
-  .config(['$showdownProvider', function($showdownProvider){
-    $showdownProvider.loadExtension('hideMePlease');
-  }])
   .controller('appCtrl', ['$state', '$scope',
     function ($state, $scope) {
       console.info('CloakMD is online');
