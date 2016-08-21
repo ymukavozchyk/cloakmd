@@ -1,50 +1,63 @@
 <!DOCTYPE html>
-<html class="no-js">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>CloakMD</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="GitHub flavored markdown notes with a twist">
+<html>
 
-    <link rel="stylesheet" href="assets/styles/css/loader.css">
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <title>CloakMD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <meta name="description" content="GitHub flavored markdown notes with a twist">
 
-  <body ng-app="cloakmd" ng-controller="appCtrl">
-    <div class="loader" ng-hide="loaded"></div>
-    <div ui-view ng-cloak ng-show="loaded"></div>
+  <link rel="stylesheet" href="assets/vendors/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="assets/vendors/github-markdown-css/github-markdown.css">
+  <link rel="stylesheet" href="assets/vendors/angularjs-toaster/toaster.css">
+  <link rel="stylesheet" href="assets/styles/css/main.css">
 
-    <link rel="stylesheet" href="assets/vendors/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/vendors/github-markdown-css/github-markdown.css">
-    <link rel="stylesheet" href="assets/vendors/angularjs-toaster/toaster.css">
-    <link rel="stylesheet" href="assets/styles/css/main.css">
+</head>
 
-    <script src="assets/vendors/angular/angular.js"></script>
-    <script src="assets/vendors/angular-animate/angular-animate.js"></script>
-    <script src="assets/vendors/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="assets/vendors/angular-local-storage/dist/angular-local-storage.js"></script>
+<body ng-app="app" ng-controller="ApplicationController" ng-strict-di>
+  <div class="view" ui-view></div>
+  <div class="loader" ng-hide="true"></div>
 
-    <script src="assets/vendors/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="assets/vendors/angular/angular.js"></script>
+  <script src="assets/vendors/angular-animate/angular-animate.js"></script>
+  <script src="assets/vendors/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="assets/vendors/angular-local-storage/dist/angular-local-storage.js"></script>
 
-    <script src="assets/vendors/angularjs-toaster/toaster.js"></script>
+  <script src="assets/vendors/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
-    <script src="assets/vendors/angular-sanitize/angular-sanitize.js"></script>
-    <script src="assets/vendors/showdown/dist/showdown.js"></script>
-    <script src="assets/vendors/ng-showdown/dist/ng-showdown.js"></script>
-    <script src="assets/js/showdown-extension.js"></script>
+  <script src="assets/vendors/angularjs-toaster/toaster.js"></script>
 
-    <script src="assets/vendors/ace-builds/src-min-noconflict/ace.js"></script>
-    <script src="assets/vendors/angular-ui-ace/ui-ace.js"></script>
+  <script src="assets/vendors/angular-sanitize/angular-sanitize.js"></script>
+  <script src="assets/vendors/showdown/dist/showdown.js"></script>
+  <script src="assets/vendors/ng-showdown/dist/ng-showdown.js"></script>
+  <script src="assets/js/showdown-extension.js"></script>
 
-    <script src="assets/vendors/sjcl/sjcl.js"></script>
+  <script src="assets/vendors/ace-builds/src-min-noconflict/ace.js"></script>
+  <script src="assets/vendors/angular-ui-ace/ui-ace.js"></script>
 
-    <script src="app/app.js"></script>
-    <script src="app/config.js"></script>
+  <script src="assets/vendors/sjcl/sjcl.js"></script>
 
-    <script src="app/main/main.js"></script>
-    <script src="app/main/main-service.js"></script>
-    <script src="app/main/main-controller.js"></script>
+  <script src="app/app.module.js"></script>
+  <script src="app/app.js"></script>
 
-    <toaster-container></toaster-container>
-  </body>
+  <script src="app/config/config.module.js"></script>
+
+  <script src="app/core/core.module.js"></script>
+  <script src="app/core/route.config.js"></script>
+
+  <script src="app/shared/shared.module.js"></script>
+  <script src="app/shared/storage.service.js"></script>
+  <script src="app/shared/credential.service.js"></script>
+
+  <script src="app/setup/setup.module.js"></script>
+  <script src="app/setup/setup.js"></script>
+
+  <script src="app/notepad/notepad.module.js"></script>
+  <script src="app/notepad/notepad.js"></script>
+  <script src="app/notepad/api.service.js"></script>
+
+  <toaster-container></toaster-container>
+</body>
+
 </html>

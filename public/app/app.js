@@ -1,18 +1,27 @@
-angular.module('cloakmd', [
-  'ui.router',
-  'ui.ace',
-  'ui.bootstrap',
-  'ngSanitize',
-  'ng-showdown',
-  'ngAnimate',
-  'toaster',
-  'LocalStorageModule',
-  'config',
-  'main'
-])
-  .controller('appCtrl', ['$state', '$scope',
-    function ($state, $scope) {
-      console.info('CloakMD is online');
-      $scope.loaded = true;
-      $state.go('main');
-  }]);
+(function () {
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('ApplicationController', ApplicationController);
+
+    ApplicationController.$inject = ['$state', '$rootScope', 'CredentialService'];
+    function ApplicationController($state, $rootScope, CredentialService) {
+        var vm = this;
+
+        activate();
+
+        function activate() {
+            $state.go('setup');
+        }
+
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            if (toState.name == 'notepad') {
+                if (!CredentialService.isPasswordPresent()) {
+                    event.preventDefault();
+                    $state.go('setup');
+                }
+            }
+        });
+    };
+})();

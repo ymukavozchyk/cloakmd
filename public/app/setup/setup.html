@@ -1,0 +1,15 @@
+<div class="container setup-container">
+
+    <form class="form-setup">
+        <h2 class="form-setup-heading text-center">{{ vm.title }}</h2>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input ng-model="vm.password" type="password" id="inputPassword" class="form-control" placeholder="Master password" required autofocus>
+        <div ng-hide="!vm.areNotesPresent" class="checkbox">
+            <label>
+            <input ng-model="vm.isResetNotepad" type="checkbox"> Reset Notepad
+          </label>
+        </div>
+        <button ng-disabled="vm.password == null || vm.password == ''" ng-click="vm.proceed()" class="btn btn-lg btn-primary btn-block" type="submit">Go To Notepad</button>
+    </form>
+
+</div>

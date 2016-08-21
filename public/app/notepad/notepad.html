@@ -1,0 +1,56 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+        aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <span class="navbar-title">CloakMD</span>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-left">
+        <li><a href="#" ng-click="vm.addNewNote()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Note</a></li>
+        <li><a href="#" ng-click="vm.removeCurrentNote()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove Note</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" ng-click="vm.sayHelloToApi()"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Say Hello to API</a></li>
+        <li ng-hide="vm.note.publicKey"><a href="#" ng-click="vm.publishNote()"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Publish</a></li>
+        <li ng-hide="!vm.note.publicKey"><a href="#"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Public Link</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li ng-repeat="note in vm.notes" ng-class="{ active: $index == vm.index }">
+          <a ng-click="vm.selectNote(note)" href="#">
+            <span class="glyphicon glyphicon-asterisk" aria-hidden="true" ng-hide="note.publicKey"></span>
+            <span class="glyphicon glyphicon-cloud" aria-hidden="true" ng-hide="!note.publicKey"></span> {{ note.title
+            }}
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <div class="row note-title">
+        <div class="col-md-12">
+          <input class="form-control" type="text" ng-model="vm.note.title" ng-change="vm.titleChanged()" ng-blur="vm.titleBlur()">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div ui-ace="{ onLoad: vm.aceLoaded, onChange: vm.aceChanged }" ng-model="vm.note.data"></div>
+        </div>
+        <div class="col-md-6">
+          <p class="markdown-body" markdown-to-html="vm.note.data"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
