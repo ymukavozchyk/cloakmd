@@ -1,24 +1,37 @@
 angular.module('main')
-  .controller('MainPageController', ['$scope', 'localStorageService', 'toaster', 'MainPageService', function ($scope, localStorageService, toaster, MainPageService) {
+  .controller('MainPageController', ['$scope', 'toaster', 'MainPageService', function ($scope, toaster, MainPageService) {
     console.info('Main Page Controller is online');
 
     var vm = this;
 
     var sampleData =
       '# CloakMD\n' +
-      'GitHub flavored markdown notes with a &&twist&&\n';
+      'GitHub flavored markdown notes with a twist\n';
 
     var sampleNotes = [{
       title: 'Untitled',
       data: sampleData,
       publicKey: null,
-      privateKey: null,
       expirationDate: null
     }];
 
-    this.notes = localStorageService.get('notes') || sampleNotes;
+    this.password = null;
+    this.isPasswordAccepted = false;
+
+    this.notes = null;
     this.index = 0;
-    this.note = this.notes[0];
+    this.note = null;
+
+    this.decryptData = function () {
+      try {
+        vm.notes = MainPageService.getNotes(vm.password) || sampleNotes;
+        vm.note = vm.notes[0]
+        vm.isPasswordAccepted = true;
+      }
+      catch (e) {
+        toaster.pop('error', 'Could not decrypt data with given password');
+      }
+    };
 
     this.aceLoaded = function (editor) {
       var session = editor.getSession();
@@ -41,19 +54,19 @@ angular.module('main')
 
     this.aceChanged = function () {
       vm.notes[vm.index] = vm.note;
-      localStorageService.set('notes', vm.notes);
+      MainPageService.setNotes(vm.notes, vm.password);
     };
 
     this.titleChanged = function () {
       vm.notes[vm.index] = vm.note;
-      localStorageService.set('notes', vm.notes);
+      MainPageService.setNotes(vm.notes, vm.password);
     };
 
     this.titleBlur = function () {
       if (vm.note.title == '') {
         vm.note.title = 'Untitled';
         vm.notes[vm.index] = vm.note;
-        localStorageService.set('notes', vm.notes);
+        MainPageService.setNotes(vm.notes, vm.password);
       }
     }
 
@@ -76,7 +89,7 @@ angular.module('main')
       else {
         vm.addNewNote();
       }
-      localStorageService.set('notes', vm.notes);
+      MainPageService.setNotes(vm.notes, vm.password);
     }
 
     this.selectNote = function (note) {
@@ -86,21 +99,20 @@ angular.module('main')
 
     this.publishNote = function () {
       vm.note.publicKey = "sample_public_key";
-      vm.note.privateKey = "sample_private_key";
       vm.note.expirationDate = new Date();
-      localStorageService.set('notes', vm.notes);
+      MainPageService.setNotes(vm.notes, vm.password);
     }
 
     this.sayHelloToApi = function () {
       MainPageService.helloApi()
-      .then(
+        .then(
         function success(res) {
           toaster.pop('success', 'Hello from API', res.Message);
         },
-        function error(err){
-          toaster.pop('success', 'Hello from API', err || 'Was not able to say hello to API');
+        function error(err) {
+          toaster.pop('error', err || 'Was not able to say hello to API');
         }
-      );
+        );
     }
   }
   ]);
