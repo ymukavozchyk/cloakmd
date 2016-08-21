@@ -20,6 +20,10 @@ angular.module('main')
           }
         },
 
+        resetData: function(){
+          localStorageService.clearAll();
+        },
+
         helloApi: function(){
           return $http.get(API_URL + '/test/hello')
         }

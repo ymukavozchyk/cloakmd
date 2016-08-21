@@ -17,12 +17,16 @@ angular.module('main')
 
     this.password = null;
     this.isPasswordAccepted = false;
+    this.isResetData = false;
 
     this.notes = null;
     this.index = 0;
     this.note = null;
 
     this.decryptData = function () {
+      if (vm.isResetData) {
+        MainPageService.resetData();
+      }
       try {
         vm.notes = MainPageService.getNotes(vm.password) || sampleNotes;
         vm.note = vm.notes[0]

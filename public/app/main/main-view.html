@@ -25,7 +25,6 @@
   </div>
 </nav>
 
-
 <div ng-hide="MainCtrl.isPasswordAccepted" class="container-fluid">
   <div class="row">
     <div class="col-md-4 col-md-offset-4 main">
@@ -33,11 +32,16 @@
         <label for="passwordInput">Password</label>
         <input ng-model="MainCtrl.password" type="password" class="form-control" id="passwordInput">
       </div>
-      <button ng-click="MainCtrl.decryptData()" ng-disabled="MainCtrl.password == null || MainCtrl.password == ''" type="button" class="btn btn-primary pull-right">Decrypt</button>
+      <div class="checkbox">
+        <label>
+      <input ng-model="MainCtrl.isResetData" type="checkbox"> Reset Data
+    </label>
+      </div>
+      <button ng-click="MainCtrl.decryptData()" ng-disabled="MainCtrl.password == null || MainCtrl.password == ''" type="button"
+        class="btn btn-primary pull-right">Proceed</button>
     </div>
   </div>
 </div>
-
 
 <div ng-hide="!MainCtrl.isPasswordAccepted" class="container-fluid">
   <div class="row">
