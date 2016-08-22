@@ -17,8 +17,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#" ng-click="vm.sayHelloToApi()"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Say Hello to API</a></li>
-        <li ng-hide="vm.note.publicKey"><a href="#" ng-click="vm.publishNote()"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Publish</a></li>
-        <li ng-hide="!vm.note.publicKey"><a href="#"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Public Link</a></li>
+        <li><a href="#" ng-click="vm.publishNote()"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Publish</a></li>
       </ul>
     </div>
   </div>
@@ -30,9 +29,7 @@
       <ul class="nav nav-sidebar">
         <li ng-repeat="note in vm.notes" ng-class="{ active: $index == vm.index }">
           <a ng-click="vm.selectNote(note)" href="#">
-            <span class="glyphicon glyphicon-asterisk" aria-hidden="true" ng-hide="note.publicKey"></span>
-            <span class="glyphicon glyphicon-cloud" aria-hidden="true" ng-hide="!note.publicKey"></span> {{ note.title
-            }}
+            <span class="glyphicon glyphicon-file" aria-hidden="true"></span> {{ note.title }}
           </a>
         </li>
       </ul>
