@@ -7,14 +7,8 @@
 
     ApiService.$inject = ['$http', 'API_URL'];
     function ApiService($http, API_URL) {
-        var service = {
-            helloApi: helloApi
-        };
+        var service = {};
 
         return service;
-
-        function helloApi() {
-            return $http.get(API_URL + '/test/hello')
-        }
     };
 })();

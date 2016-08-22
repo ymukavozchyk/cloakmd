@@ -95,17 +95,5 @@
             vm.note.publicKey = "sample_public_key";
             saveNotes();
         };
-
-        vm.sayHelloToApi = function () {
-            ApiService.helloApi()
-                .then(
-                function success(res) {
-                    toaster.pop('success', 'API', res.data.Message);
-                },
-                function error(err) {
-                    toaster.pop('error', err || 'Was not able to say hello to API');
-                }
-                );
-        };
     }
 })();
