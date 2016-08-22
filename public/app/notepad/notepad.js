@@ -93,7 +93,6 @@
 
         vm.publishNote = function () {
             vm.note.publicKey = "sample_public_key";
-            vm.note.expirationDate = new Date();
             saveNotes();
         };
 

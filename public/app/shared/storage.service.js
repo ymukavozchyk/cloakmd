@@ -5,16 +5,15 @@
         .module('app.shared')
         .service('StorageService', StorageService);
 
-    StorageService.$inject = ['localStorageService', 'CredentialService'];
-    function StorageService(localStorageService, CredentialService) {
+    StorageService.$inject = ['localStorageService', 'CredentialService', 'LS_NOTEPAD_COLLECTION'];
+    function StorageService(localStorageService, CredentialService, LS_NOTEPAD_COLLECTION) {
         var sampleData =
             '# CloakMD\n' +
             'GitHub flavored markdown notes with a twist\n';
         var sampleNotes = [{
             title: 'Untitled',
             data: sampleData,
-            publicKey: null,
-            expirationDate: null
+            publicKey: null
         }];
         var localStorageData = null;
         var notes = null;
@@ -30,7 +29,7 @@
         return service;
 
         function areNotesPresent() {
-            localStorageData = localStorageService.get('data');
+            localStorageData = localStorageService.get(LS_NOTEPAD_COLLECTION);
             if (localStorageData != null) {
                 return true;
             }
@@ -49,7 +48,7 @@
                 try {
                     var jsonData = angular.toJson(notes);
                     var encrypted = sjcl.encrypt(CredentialService.getPassword(), jsonData);
-                    localStorageService.set('data', encrypted);
+                    localStorageService.set(LS_NOTEPAD_COLLECTION, encrypted);
                     return true;
                 }
                 catch (e) {

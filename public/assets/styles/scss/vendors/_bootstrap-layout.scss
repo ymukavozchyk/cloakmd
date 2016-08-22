@@ -25,6 +25,10 @@ body {
     border-right: 1px solid #eee;
   }
 
+  .sidebar > li {
+    word-wrap: break-word;
+  }
+
 .nav-sidebar {
   margin-right: -21px;
   margin-bottom: 20px;
