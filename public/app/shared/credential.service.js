@@ -9,6 +9,7 @@
         var password = null;
 
         var service = {
+            reset: reset,
             isPasswordPresent: isPasswordPresent,
             setPassword: setPassword,
             getPassword: getPassword
@@ -16,13 +17,15 @@
 
         return service;
 
+        function reset(){
+            password = null;
+        };
+
         function isPasswordPresent() {
             if (password != null) {
                 return true;
             }
-            else {
-                return false;
-            }
+            return false;
         };
 
         function setPassword(value) {

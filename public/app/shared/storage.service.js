@@ -20,6 +20,7 @@
         var selectedNoteForSharing = null;
 
         var service = {
+            reset: reset,
             areNotesPresent: areNotesPresent,
             setNotes: setNotes,
             getNotes: getNotes,
@@ -31,6 +32,12 @@
         };
 
         return service;
+
+        function reset(){
+            localStorageData = null;
+            notes = null;
+            selectedNoteForSharing = null;
+        };
 
         function areNotesPresent() {
             localStorageData = localStorageService.get(LS_NOTEPAD_COLLECTION);
@@ -80,14 +87,14 @@
                 return true;
             }
             return false;
-        }
+        };
 
         function setNoteForSharing(data) {
             selectedNoteForSharing = data;
-        }
+        };
 
         function getNoteForSharing(){
             return selectedNoteForSharing;
-        }
+        };
     }
 })();

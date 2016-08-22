@@ -16,6 +16,8 @@
         activate();
 
         function activate() {
+            CredentialService.reset();
+            StorageService.reset();
             vm.areNotesPresent = StorageService.areNotesPresent();
             if (!vm.areNotesPresent) {
                 vm.title = 'Setup Notepad';
