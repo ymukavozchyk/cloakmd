@@ -5,8 +5,8 @@
         .module('app')
         .controller('ApplicationController', ApplicationController);
 
-    ApplicationController.$inject = ['$state', '$rootScope', 'CredentialService'];
-    function ApplicationController($state, $rootScope, CredentialService) {
+    ApplicationController.$inject = ['$state', '$rootScope', 'CredentialService', 'StorageService'];
+    function ApplicationController($state, $rootScope, CredentialService, StorageService) {
         var vm = this;
 
         activate();
@@ -20,6 +20,12 @@
                 if (!CredentialService.isPasswordPresent()) {
                     event.preventDefault();
                     $state.go('setup');
+                }
+            }
+            else if (toState.name == 'share') {
+                if (!StorageService.isNoteSelectedForSharing()) {
+                    event.preventDefault();
+                    $state.go('notepad');
                 }
             }
         });

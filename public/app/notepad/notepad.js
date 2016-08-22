@@ -5,8 +5,8 @@
         .module('app.notepad')
         .controller('NotepadController', NotepadController);
 
-    NotepadController.$inject = ['StorageService', 'ApiService', 'toaster'];
-    function NotepadController(StorageService, ApiService, toaster) {
+    NotepadController.$inject = ['$state', 'StorageService', 'ApiService', 'toaster'];
+    function NotepadController($state, StorageService, ApiService, toaster) {
         var vm = this;
 
         vm.notes = null;
@@ -36,6 +36,7 @@
             editor.setShowPrintMargin(false);
             editor.setOption('scrollPastEnd', false);
             editor.setOption('maxLines', 'Infinity');
+            editor.$blockScrolling = 'Infinity';
 
             session.setMode('ace/mode/markdown');
             session.setFoldStyle('markbegin');
@@ -91,9 +92,9 @@
             vm.note = note;
         };
 
-        vm.publishNote = function () {
-            vm.note.publicKey = "sample_public_key";
-            saveNotes();
+        vm.shareNote = function () {
+            StorageService.setNoteForSharing(vm.note);
+            $state.go('share');
         };
     }
 })();

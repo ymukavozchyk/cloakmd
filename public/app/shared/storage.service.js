@@ -17,13 +17,17 @@
         }];
         var localStorageData = null;
         var notes = null;
+        var selectedNoteForSharing = null;
 
         var service = {
             areNotesPresent: areNotesPresent,
             setNotes: setNotes,
             getNotes: getNotes,
             decryptNotes: decryptNotes,
-            resetNotes: resetNotes
+            resetNotes: resetNotes,
+            isNoteSelectedForSharing: isNoteSelectedForSharing,
+            setNoteForSharing: setNoteForSharing,
+            getNoteForSharing: getNoteForSharing
         };
 
         return service;
@@ -33,9 +37,7 @@
             if (localStorageData != null) {
                 return true;
             }
-            else {
-                return false;
-            }
+            return false;
         };
 
         function resetNotes() {
@@ -43,17 +45,15 @@
         };
 
         function setNotes(data) {
-            if (data != null) {
-                notes = data;
-                try {
-                    var jsonData = angular.toJson(notes);
-                    var encrypted = sjcl.encrypt(CredentialService.getPassword(), jsonData);
-                    localStorageService.set(LS_NOTEPAD_COLLECTION, encrypted);
-                    return true;
-                }
-                catch (e) {
-                    return false;
-                }
+            notes = data;
+            try {
+                var jsonData = angular.toJson(notes);
+                var encrypted = sjcl.encrypt(CredentialService.getPassword(), jsonData);
+                localStorageService.set(LS_NOTEPAD_COLLECTION, encrypted);
+                return true;
+            }
+            catch (e) {
+                return false;
             }
         };
 
@@ -61,9 +61,7 @@
             if (notes != null) {
                 return notes;
             }
-            else {
-                return sampleNotes;
-            }
+            return sampleNotes;
         };
 
         function decryptNotes() {
@@ -76,5 +74,20 @@
                 return false;
             }
         };
+
+        function isNoteSelectedForSharing() {
+            if (selectedNoteForSharing != null) {
+                return true;
+            }
+            return false;
+        }
+
+        function setNoteForSharing(data) {
+            selectedNoteForSharing = data;
+        }
+
+        function getNoteForSharing(){
+            return selectedNoteForSharing;
+        }
     }
 })();

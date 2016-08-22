@@ -6,6 +6,7 @@
         'app.config',
         'app.shared',
         'app.notepad',
-        'app.setup'
+        'app.setup',
+        'app.share'
     ]);
 })();
