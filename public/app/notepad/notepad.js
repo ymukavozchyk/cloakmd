@@ -6,7 +6,7 @@
         .controller('NotepadController', NotepadController);
 
     NotepadController.$inject = ['$state', 'StorageService', 'ApiService', 'CredentialService', 'SharingService', 'toaster'];
-    function NotepadController($state, StorageService, ApiService, CredentialService, toaster) {
+    function NotepadController($state, StorageService, ApiService, CredentialService, SharingService, toaster) {
         var vm = this;
 
         vm.notes = null;
@@ -18,7 +18,7 @@
         function activate() {
             vm.notes = StorageService.getNotes();
             vm.note = vm.notes[0];
-            StorageService.resetNoteForSharing();
+            SharingService.reset();
         };
 
         function saveNotes() {
