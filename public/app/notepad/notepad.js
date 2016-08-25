@@ -5,8 +5,8 @@
         .module('app.notepad')
         .controller('NotepadController', NotepadController);
 
-    NotepadController.$inject = ['$state', 'StorageService', 'ApiService', 'SharingService', 'toaster'];
-    function NotepadController($state, StorageService, ApiService, SharingService, toaster) {
+    NotepadController.$inject = ['$state', 'StorageService', 'ApiService', 'CredentialService', 'SharingService', 'toaster'];
+    function NotepadController($state, StorageService, ApiService, CredentialService, toaster) {
         var vm = this;
 
         vm.notes = null;
@@ -18,6 +18,7 @@
         function activate() {
             vm.notes = StorageService.getNotes();
             vm.note = vm.notes[0];
+            StorageService.resetNoteForSharing();
         };
 
         function saveNotes() {
@@ -96,5 +97,11 @@
             SharingService.setNoteForSharing(vm.note);
             $state.go('share');
         };
+
+        vm.exit = function(){
+            StorageService.reset();
+            CredentialService.reset();
+            $state.go('setup');
+        }
     }
 })();
