@@ -21,14 +21,18 @@
 
         var service = {
             reset: reset,
+            resetNotes: resetNotes,
+            resetNoteForSharing: resetNoteForSharing,
+
             areNotesPresent: areNotesPresent,
+            isNoteSelectedForSharing: isNoteSelectedForSharing,
+
             setNotes: setNotes,
             getNotes: getNotes,
-            decryptNotes: decryptNotes,
-            resetNotes: resetNotes,
-            isNoteSelectedForSharing: isNoteSelectedForSharing,
             setNoteForSharing: setNoteForSharing,
-            getNoteForSharing: getNoteForSharing
+            getNoteForSharing: getNoteForSharing,
+
+            decryptNotes: decryptNotes
         };
 
         return service;
@@ -38,6 +42,10 @@
             notes = null;
             selectedNoteForSharing = null;
         };
+
+        function resetNoteForSharing(){
+            selectedNoteForSharing = null;
+        }
 
         function areNotesPresent() {
             localStorageData = localStorageService.get(LS_NOTEPAD_COLLECTION);
