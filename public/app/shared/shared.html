@@ -16,7 +16,10 @@
 <div class="container-fluid">
   <div class="row">
       <div class="col-md-8 col-md-offset-2">
-          <p> {{ vm.note.data }}</p>
+          <h1><span class="glyphicon glyphicon-file" aria-hidden="true"></span> {{ vm.note.title }}</h1>
+      </div>
+      <div class="col-md-8 col-md-offset-2">
+          <p class="markdown-body" markdown-to-html="vm.note.data"></p>
       </div>
   </div>
 </div>

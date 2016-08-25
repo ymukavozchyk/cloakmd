@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.shared')
+        .module('app.core')
         .service('StorageService', StorageService);
 
     StorageService.$inject = ['localStorageService', 'CredentialService', 'LS_NOTEPAD_COLLECTION'];
@@ -17,7 +17,6 @@
         }];
         var localStorageData = null;
         var notes = null;
-        var selectedNoteForSharing = null;
 
         var service = {
             reset: reset,
@@ -25,10 +24,7 @@
             setNotes: setNotes,
             getNotes: getNotes,
             decryptNotes: decryptNotes,
-            resetNotes: resetNotes,
-            isNoteSelectedForSharing: isNoteSelectedForSharing,
-            setNoteForSharing: setNoteForSharing,
-            getNoteForSharing: getNoteForSharing
+            resetNotes: resetNotes
         };
 
         return service;
@@ -36,7 +32,6 @@
         function reset(){
             localStorageData = null;
             notes = null;
-            selectedNoteForSharing = null;
         };
 
         function areNotesPresent() {
@@ -80,21 +75,6 @@
             catch (e) {
                 return false;
             }
-        };
-
-        function isNoteSelectedForSharing() {
-            if (selectedNoteForSharing != null) {
-                return true;
-            }
-            return false;
-        };
-
-        function setNoteForSharing(data) {
-            selectedNoteForSharing = data;
-        };
-
-        function getNoteForSharing(){
-            return selectedNoteForSharing;
         };
     }
 })();

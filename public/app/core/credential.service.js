@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.shared')
+        .module('app.core')
         .service('CredentialService', CredentialService);
 
     function CredentialService() {

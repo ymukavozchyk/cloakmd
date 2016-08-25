@@ -5,8 +5,8 @@
         .module('app')
         .controller('ApplicationController', ApplicationController);
 
-    ApplicationController.$inject = ['$state', '$rootScope', 'CredentialService', 'StorageService'];
-    function ApplicationController($state, $rootScope, CredentialService, StorageService) {
+    ApplicationController.$inject = ['$state', '$rootScope', 'CredentialService', 'SharingService'];
+    function ApplicationController($state, $rootScope, CredentialService, SharingService) {
         var vm = this;
 
         activate();
@@ -23,7 +23,7 @@
                 }
             }
             else if (toState.name == 'share') {
-                if (!StorageService.isNoteSelectedForSharing()) {
+                if (!SharingService.isNoteSelectedForSharing()) {
                     event.preventDefault();
                     $state.go('notepad');
                 }

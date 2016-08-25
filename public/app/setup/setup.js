@@ -5,8 +5,8 @@
         .module('app.setup')
         .controller('SetupController', SetupController);
 
-    SetupController.$inject = ['StorageService', 'CredentialService', '$state', 'toaster'];
-    function SetupController(StorageService, CredentialService, $state, toaster) {
+    SetupController.$inject = ['StorageService', 'CredentialService', 'SharingService', '$state', 'toaster'];
+    function SetupController(StorageService, CredentialService, SharingService, $state, toaster) {
         var vm = this;
         vm.title = 'Unlock Notepad';
         vm.areNotesPresent = false;
@@ -18,6 +18,7 @@
         function activate() {
             CredentialService.reset();
             StorageService.reset();
+            SharingService.reset();
             vm.areNotesPresent = StorageService.areNotesPresent();
             if (!vm.areNotesPresent) {
                 vm.title = 'Setup Notepad';
