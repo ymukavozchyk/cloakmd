@@ -1,5 +1,5 @@
 <md-toolbar layout="row">
-  <md-button class="menu" hide-gt-lg ng-click="vm.toggleList()" aria-label="Show Notes">
+  <md-button class="menu" hide-gt-md ng-click="vm.toggleList()" aria-label="Show Notes">
     <md-icon md-svg-icon="menu"></md-icon>
   </md-button>
   <span flex></span>
@@ -9,7 +9,7 @@
   <span flex></span>
   <md-button ng-click="vm.exit()" aria-label="Exit">
     <md-icon md-svg-icon="exit"></md-icon>
-    <span ng-hide="vm.isScreenXs || vm.isScreenSm">Exit</span>
+    <span hide-xs hide-sm>Exit</span>
   </md-button>
 </md-toolbar>
 

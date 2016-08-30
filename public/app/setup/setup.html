@@ -6,19 +6,21 @@
                     <div class="md-toolbar-tools">{{ vm.title }}</div>
                 </md-toolbar>
                 <md-content layout-padding>
-                    <md-input-container class="md-block">
-                        <label>Master Password</label>
-                        <input ng-model="vm.password" type="password">
-                    </md-input-container>
-                    <md-switch class="md-primary" md-no-ink aria-label="Reset Notepad" ng-model="vm.isResetNotepad">
-                        Reset Notepad
-                    </md-switch>
-                    <md-input-container layout="row" layout-align="center center">
-                        <md-button class="md-raised md-primary" ng-disabled="vm.password == null || vm.password == ''" ng-click="vm.proceed()">
-                            <md-icon md-svg-icon="lock"></md-icon>
-                            Go To Notepad
-                        </md-button>
-                    </md-input-container>
+                    <form>
+                        <md-input-container class="md-block">
+                            <label>Master Password</label>
+                            <input ng-model="vm.password" type="password">
+                        </md-input-container>
+                        <md-switch class="md-primary" md-no-ink aria-label="Reset Notepad" ng-model="vm.isResetNotepad">
+                            Reset Notepad
+                        </md-switch>
+                        <md-input-container layout="row" layout-align="center center">
+                            <md-button type="submit" class="md-raised md-primary" ng-disabled="vm.password == null || vm.password == ''" ng-click="vm.proceed()">
+                                <md-icon md-svg-icon="lock"></md-icon>
+                                Go To Notepad
+                            </md-button>
+                        </md-input-container>
+                    </form>
                 </md-content>
             </div>
         </div>
