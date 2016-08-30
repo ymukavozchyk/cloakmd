@@ -4,12 +4,12 @@
   </md-button>
   <span flex></span>
   <div layout="row" layout-align="center center">
-    <img src="./assets/images/logo.png">
+    CloakMD
   </div>
   <span flex></span>
   <md-button ng-click="vm.exit()" aria-label="Exit">
     <md-icon md-svg-icon="exit"></md-icon>
-    Exit
+    <span ng-hide="vm.isScreenXs || vm.isScreenSm">Exit</span>
   </md-button>
 </md-toolbar>
 
@@ -31,7 +31,7 @@
   </md-sidenav>
 
   <div flex layout="column">
-    <md-content flex id="content">
+    <md-content class="content" flex>
       <md-input-container class="md-block">
         <label>Title</label>
         <input ng-model="vm.note.title" ng-change="vm.titleChanged()" ng-blur="vm.titleBlur()">
@@ -41,10 +41,7 @@
         <div layout-fill class="md-whiteframe-1dp" flex ui-ace="{ onLoad: vm.aceLoaded, onChange: vm.aceChanged }" ng-model="vm.note.data" ng-class="{ ace_editor_stacked: vm.isScreenXs || vm.isScreenSm }"></div>
         <div layout-fill class="md-whiteframe-1dp markdown-body" flex markdown-to-html="vm.note.data"></div>
       </div>
-
     </md-content>
-
-    <span flex></span>
 
     <md-fab-toolbar md-direction="left">
       <md-fab-trigger class="align-with-text">
