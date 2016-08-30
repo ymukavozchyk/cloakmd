@@ -28,7 +28,7 @@ gulp.task('sass-dev', function () {
 
   return gulp.src('public/assets/styles/scss/**/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('public/assets/styles/css'))
+    .pipe(gulp.dest('public/assets/styles/css/build'))
     .pipe(browserSync.reload({
       stream: true
     }));
@@ -37,5 +37,5 @@ gulp.task('sass-dev', function () {
 gulp.task('build', function () {
   return gulp.src('public/assets/styles/scss/**/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('public/assets/styles/css'));
+    .pipe(gulp.dest('public/assets/styles/css/build'));
 });

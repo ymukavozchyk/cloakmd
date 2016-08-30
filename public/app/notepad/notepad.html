@@ -1,55 +1,79 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-        aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-title">CloakMD</span>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-left">
-        <li><a href="#" ng-click="vm.addNewNote()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Note</a></li>
-        <li><a href="#" ng-click="vm.removeCurrentNote()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove Note</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" ng-click="vm.exit()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Exit</a></li>
-      </ul>
-    </div>
+<md-toolbar layout="row">
+  <md-button class="menu" hide-gt-lg ng-click="vm.toggleList()" aria-label="Show Notes">
+    <md-icon md-svg-icon="menu"></md-icon>
+  </md-button>
+  <span flex></span>
+  <div layout="row" layout-align="center center">
+    <img src="./assets/images/logo.png">
   </div>
-</nav>
+  <span flex></span>
+  <md-button ng-click="vm.exit()" aria-label="Exit">
+    <md-icon md-svg-icon="exit"></md-icon>
+    Exit
+  </md-button>
+</md-toolbar>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-      <ul class="nav nav-sidebar">
-        <li ng-repeat="note in vm.notes" ng-class="{ active: $index == vm.index }">
-          <a ng-click="vm.selectNote(note)" href="#">
-            <span class="glyphicon glyphicon-file" aria-hidden="true"></span> {{ note.title }}
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <div class="row note-title">
-        <div class="col-md-11">
-          <input class="form-control" type="text" ng-model="vm.note.title" ng-change="vm.titleChanged()" ng-blur="vm.titleBlur()">
-        </div>
-        <div class="col-md-1">
-          <button ng-click="vm.shareNote()" class="btn btn-primary"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Publish</button>
-        </div>
+
+<div flex layout="row">
+
+  <md-sidenav ng-click="vm.toggleList()" md-is-locked-open="$mdMedia('gt-md')" md-component-id="left" class="md-whiteframe-z2">
+    <md-toolbar>
+      <h1 class="md-toolbar-tools">Notes</h1>
+    </md-toolbar>
+    <md-list>
+      <md-list-item ng-repeat="note in vm.notes">
+        <md-button ng-click="vm.selectNote(note)" ng-class="{ selected: $index == vm.index }">
+          <md-icon md-svg-icon="note"></md-icon>
+          {{ note.title }}
+        </md-button>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
+
+  <div flex layout="column">
+    <md-content flex id="content">
+      <md-input-container class="md-block">
+        <label>Title</label>
+        <input ng-model="vm.note.title" ng-change="vm.titleChanged()" ng-blur="vm.titleBlur()">
+      </md-input-container>
+
+      <div layout="row" layout-sm="column" layout-xs="column">
+        <div layout-fill class="md-whiteframe-1dp" flex ui-ace="{ onLoad: vm.aceLoaded, onChange: vm.aceChanged }" ng-model="vm.note.data" ng-class="{ ace_editor_stacked: vm.isScreenXs || vm.isScreenSm }"></div>
+        <div layout-fill class="md-whiteframe-1dp markdown-body" flex markdown-to-html="vm.note.data"></div>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div ui-ace="{ onLoad: vm.aceLoaded, onChange: vm.aceChanged }" ng-model="vm.note.data"></div>
-        </div>
-        <div class="col-md-6">
-          <p class="markdown-body" markdown-to-html="vm.note.data"></p>
-        </div>
-      </div>
-    </div>
+
+    </md-content>
+
+    <span flex></span>
+
+    <md-fab-toolbar md-direction="left">
+      <md-fab-trigger class="align-with-text">
+        <md-button aria-label="menu" class="md-fab md-primary">
+          <md-icon md-svg-icon="menu"></md-icon>
+        </md-button>
+      </md-fab-trigger>
+
+      <md-toolbar>
+        <md-fab-actions class="md-toolbar-tools">
+
+          <md-button ng-click="vm.addNewNote()" class="md-raised" aria-label="New Note">
+            <md-icon md-svg-icon="add"></md-icon>
+            <span hide-xs>New Note</span>
+          </md-button>
+
+          <md-button ng-click="vm.removeCurrentNote()" class="md-raised" aria-label="Remove Note">
+            <md-icon md-svg-icon="remove"></md-icon>
+            <span hide-xs>Remove Note</span>
+          </md-button>
+
+          <md-button ng-click="vm.shareNote()" class="md-raised" aria-label="Learn More">
+            <md-icon md-svg-icon="share"></md-icon>
+            <span hide-xs>Share Note</span>
+          </md-button>
+
+        </md-fab-actions>
+      </md-toolbar>
+    </md-fab-toolbar>
   </div>
+
 </div>

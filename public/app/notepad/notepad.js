@@ -5,13 +5,15 @@
         .module('app.notepad')
         .controller('NotepadController', NotepadController);
 
-    NotepadController.$inject = ['$state', 'StorageService', 'ApiService', 'CredentialService', 'SharingService', 'toaster'];
-    function NotepadController($state, StorageService, ApiService, CredentialService, SharingService, toaster) {
+    NotepadController.$inject = ['$mdMedia', '$mdSidenav', '$state', 'StorageService', 'ApiService', 'CredentialService', 'SharingService'];
+    function NotepadController($mdMedia, $mdSidenav, $state, StorageService, ApiService, CredentialService, SharingService) {
         var vm = this;
 
         vm.notes = null;
         vm.index = 0;
         vm.note = null;
+        vm.isScreenXs = $mdMedia('xs');
+        vm.isScreenSm = $mdMedia('sm');
 
         activate();
 
@@ -26,6 +28,10 @@
             if (!saveResult) {
                 toaster.pop('error', 'Was not able to save notes');
             }
+        };
+
+        vm.toggleList = function () {
+            $mdSidenav('left').toggle();
         };
 
         vm.aceLoaded = function (editor) {
@@ -98,7 +104,7 @@
             $state.go('share');
         };
 
-        vm.exit = function(){
+        vm.exit = function () {
             StorageService.reset();
             CredentialService.reset();
             $state.go('setup');

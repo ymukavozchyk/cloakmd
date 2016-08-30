@@ -5,13 +5,11 @@
   "dependencies": {
     "angular": "latest",
     "angular-ui-router": "latest",
-    "ng-showdown": "latest",
     "angular-ui-ace": "latest",
+    "angular-material": "latest",
+    "ng-showdown": "latest",
     "github-markdown-css": "latest",
     "angular-local-storage": "latest",
-    "angular-bootstrap": "latest",
-    "bootstrap": "latest",
-    "angularjs-toaster": "latest",
     "sjcl": "latest"
   }
 }

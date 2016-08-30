@@ -5,8 +5,8 @@
         .module('app.setup')
         .controller('SetupController', SetupController);
 
-    SetupController.$inject = ['StorageService', 'CredentialService', 'SharingService', '$state', 'toaster'];
-    function SetupController(StorageService, CredentialService, SharingService, $state, toaster) {
+    SetupController.$inject = ['StorageService', 'CredentialService', 'SharingService', '$state', '$mdToast'];
+    function SetupController(StorageService, CredentialService, SharingService, $state, $mdToast) {
         var vm = this;
         vm.title = 'Unlock Notepad';
         vm.areNotesPresent = false;
@@ -38,7 +38,7 @@
                         $state.go('notepad');
                     }
                     else {
-                        toaster.pop('error', 'Was not able to decrypt notes with given master password');
+                        $mdToast.showSimple('Was not able to decrypt notes with given master password');
                     }
                 }
             }
