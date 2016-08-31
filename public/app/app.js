@@ -2,7 +2,16 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('app',
+        [
+            'ngMaterial',
+            'app.core',
+            'app.config',
+            'app.shared',
+            'app.notepad',
+            'app.setup',
+            'app.share'
+        ])
         .controller('ApplicationController', ApplicationController);
 
     ApplicationController.$inject = ['$state', '$rootScope', 'CredentialService', 'SharingService'];
