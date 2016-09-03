@@ -38,11 +38,16 @@
                         $state.go('notepad');
                     }
                     else {
-                        $mdToast.showSimple('Was not able to decrypt notes with given master password');
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .textContent('Was not able to decrypt notes with given master password')
+                                .position('top right')
+                                .hideDelay(1500)
+                        );
                     }
                 }
             }
-            else{
+            else {
                 $state.go('notepad');
             }
         };
