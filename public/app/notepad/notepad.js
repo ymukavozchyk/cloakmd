@@ -45,7 +45,7 @@
 
         vm.openSharingDialog = function (ev) {
             $mdDialog.show({
-                templateUrl: 'app/share/share.html',
+                templateUrl: 'app/notepad/share/share.html',
                 targetEvent: ev,
                 controller: 'ShareController as vm'
             });
