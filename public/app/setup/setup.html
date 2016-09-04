@@ -3,7 +3,9 @@
         <div layout="row" layout-align="center center" layout-fill>
             <div class="white" layout="column" flex-gt-sm="20">
                 <md-toolbar>
-                    <div class="md-toolbar-tools">{{ vm.title }}</div>
+                    <div class="md-toolbar-tools">
+                        {{ vm.title }}
+                    </div>
                 </md-toolbar>
                 <md-content layout-padding>
                     <form name="setupForm" ng-submit="vm.proceed()">
@@ -20,7 +22,6 @@
                         </md-checkbox>
                         <md-input-container layout="row" layout-align="center center">
                             <md-button type="submit" class="md-raised md-primary" ng-disabled="setupForm.$invalid">
-                                <md-icon md-svg-icon="lock"></md-icon>
                                 Go To Notepad
                             </md-button>
                         </md-input-container>

@@ -5,8 +5,8 @@
         .module('app.notepad')
         .controller('NotepadController', NotepadController);
 
-    NotepadController.$inject = ['$mdMedia', '$mdSidenav', '$state', 'StorageService', 'ApiService', 'CredentialService', 'SharingService'];
-    function NotepadController($mdMedia, $mdSidenav, $state, StorageService, ApiService, CredentialService, SharingService) {
+    NotepadController.$inject = ['$mdDialog', '$mdMedia', '$mdSidenav', '$state', 'StorageService', 'ApiService', 'CredentialService', 'SharingService'];
+    function NotepadController($mdDialog, $mdMedia, $mdSidenav, $state, StorageService, ApiService, CredentialService, SharingService) {
         var vm = this;
 
         vm.notes = null;
@@ -32,6 +32,18 @@
 
         vm.toggleList = function () {
             $mdSidenav('left').toggle();
+        };
+
+        vm.openMenu = function ($mdOpenMenu, ev) {
+            $mdOpenMenu(ev);
+        };
+
+        vm.openSharingDialog = function (ev) {
+            $mdDialog.show({
+                templateUrl: 'app/share/share.html',
+                targetEvent: ev,
+                controller: 'ShareController as vm'
+            });
         };
 
         vm.aceLoaded = function (editor) {
@@ -97,11 +109,6 @@
         vm.selectNote = function (note) {
             vm.index = vm.notes.indexOf(note);
             vm.note = note;
-        };
-
-        vm.shareNote = function () {
-            SharingService.setNoteForSharing(vm.note);
-            $state.go('share');
         };
 
         vm.exit = function () {

@@ -1,6 +1,6 @@
 <md-toolbar layout="row">
   <md-button class="menu" hide-gt-md ng-click="vm.toggleList()" aria-label="Show Notes">
-    <md-icon md-svg-icon="menu"></md-icon>
+    <md-icon md-svg-icon="show_notes"></md-icon>
   </md-button>
   <span flex></span>
   <div layout="row" layout-align="center center">
@@ -9,7 +9,6 @@
   <span flex></span>
   <md-button ng-click="vm.exit()" aria-label="Exit">
     <md-icon md-svg-icon="exit"></md-icon>
-    <span hide-xs hide-sm>Exit</span>
   </md-button>
 </md-toolbar>
 
@@ -18,14 +17,15 @@
 
   <md-sidenav ng-click="vm.toggleList()" md-is-locked-open="$mdMedia('gt-md')" md-component-id="left" class="md-whiteframe-z2">
     <md-toolbar>
-      <h1 class="md-toolbar-tools">Notes</h1>
+      <div layout="row" layout-align="right center">
+        <h1 class="md-toolbar-tools">Notes</h1>
+        <div ng-include="'app/notepad/partials/notepad-menu.html'"></div>
+      </div>
     </md-toolbar>
+
     <md-list>
-      <md-list-item ng-repeat="note in vm.notes">
-        <md-button ng-click="vm.selectNote(note)" ng-class="{ selected: $index == vm.index }">
-          <md-icon md-svg-icon="note"></md-icon>
-          {{ note.title }}
-        </md-button>
+      <md-list-item ng-repeat="note in vm.notes" ng-click="vm.selectNote(note)" ng-class="{ selected: $index == vm.index }">
+        <h4>{{ note.title }}</h4>
       </md-list-item>
     </md-list>
   </md-sidenav>
@@ -38,39 +38,10 @@
       </md-input-container>
 
       <div layout="row" layout-sm="column" layout-xs="column">
-        <div layout-fill class="md-whiteframe-1dp" flex ui-ace="{ onLoad: vm.aceLoaded, onChange: vm.aceChanged }" ng-model="vm.note.data" ng-class="{ ace_editor_stacked: vm.isScreenXs || vm.isScreenSm }"></div>
+        <div layout-fill class="md-whiteframe-1dp" flex ui-ace="{ onLoad: vm.aceLoaded, onChange: vm.aceChanged }" ng-model="vm.note.data"
+          ng-class="{ ace_editor_stacked: vm.isScreenXs || vm.isScreenSm }"></div>
         <div layout-fill class="md-whiteframe-1dp markdown-body" flex markdown-to-html="vm.note.data"></div>
       </div>
     </md-content>
-
-    <md-fab-toolbar md-direction="left">
-      <md-fab-trigger class="align-with-text">
-        <md-button aria-label="menu" class="md-fab md-primary">
-          <md-icon md-svg-icon="menu"></md-icon>
-        </md-button>
-      </md-fab-trigger>
-
-      <md-toolbar>
-        <md-fab-actions class="md-toolbar-tools">
-
-          <md-button ng-click="vm.addNewNote()" class="md-raised" aria-label="New Note">
-            <md-icon md-svg-icon="add"></md-icon>
-            <span hide-xs>New Note</span>
-          </md-button>
-
-          <md-button ng-click="vm.removeCurrentNote()" class="md-raised" aria-label="Remove Note">
-            <md-icon md-svg-icon="remove"></md-icon>
-            <span hide-xs>Remove Note</span>
-          </md-button>
-
-          <md-button ng-click="vm.shareNote()" class="md-raised" aria-label="Learn More">
-            <md-icon md-svg-icon="share"></md-icon>
-            <span hide-xs>Share Note</span>
-          </md-button>
-
-        </md-fab-actions>
-      </md-toolbar>
-    </md-fab-toolbar>
   </div>
-
 </div>

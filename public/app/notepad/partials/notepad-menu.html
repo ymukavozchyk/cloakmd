@@ -1,0 +1,26 @@
+<md-menu>
+    <md-button aria-label="Open notes menu" class="md-icon-button" ng-click="vm.openMenu($mdOpenMenu, $event)">
+        <md-icon md-menu-origin md-svg-icon="notepad_menu"></md-icon>
+    </md-button>
+    <md-menu-content width="4">
+        <md-menu-item>
+            <md-button ng-click="vm.addNewNote()">
+                <md-icon md-svg-icon="add" md-menu-align-target></md-icon>
+                Add
+            </md-button>
+        </md-menu-item>
+        <md-menu-item>
+            <md-button ng-click="vm.removeCurrentNote()">
+                <md-icon md-svg-icon="remove" md-menu-align-target></md-icon>
+                Remove
+            </md-button>
+        </md-menu-item>
+        <md-menu-divider></md-menu-divider>
+        <md-menu-item>
+            <md-button ng-click="vm.openSharingDialog($event)">
+                <md-icon md-svg-icon="share" md-menu-align-target></md-icon>
+                Share
+            </md-button>
+        </md-menu-item>
+    </md-menu-content>
+</md-menu>

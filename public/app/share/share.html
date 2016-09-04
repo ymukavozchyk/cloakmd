@@ -1,23 +1,44 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-        aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-title">CloakMD</span>
+<md-dialog aria-label="Share Note">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Share Note</h2>
     </div>
-  </div>
-</nav>
+  </md-toolbar>
+  <md-content layout-padding>
+    <form name="shareForm" ng-submit="vm.shareNote()">
 
-<div class="container-fluid">
-  <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-          <p> {{ vm.note.data }}</p>
+      <md-input-container class="md-block">
+        <label>Password</label>
+        <input md-maxlength="70" required md-no-asterisk name="password" ng-model="vm.sharingModel.password" type="password" autofocus>
+        <div ng-messages="shareForm.password.$error">
+          <div ng-message="required">This is required.</div>
+          <div ng-message="md-maxlength">The password must be less than 70 characters long.</div>
+        </div>
+      </md-input-container>
+
+      <div class="options-block" layout="row">
+        <div flex>
+          <md-checkbox aria-label="Expire on" ng-model="vm.isExpirable">
+            Expire on
+          </md-checkbox>
+          <md-datepicker ng-disabled="!vm.isExpirable" ng-model="vm.expirationDate" md-min-date="vm.minDate" md-placeholder="Expiration date"></md-datepicker>
+        </div>
+        <div flex>
+          <md-checkbox aria-label="Destroy after reading" ng-model="vm.destroyAfterReading">
+            Destroy after reading
+          </md-checkbox>
+        </div>
       </div>
-  </div>
-</div>
 
+      <div layout="row">
+        <md-button class="md-raised" ng-click="vm.closeDialog()">
+          Cancel
+        </md-button>
+        <span flex></span>
+        <md-button class="md-raised md-primary" ng-disabled="shareForm.$invalid" type="submit">
+          Share
+        </md-button>
+      </div>
+    </form>
+  </md-content>
+</md-dialog>

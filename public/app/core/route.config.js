@@ -20,12 +20,6 @@
                 templateUrl: 'app/notepad/notepad.html',
                 controller: 'NotepadController',
                 controllerAs: 'vm'
-            })
-            .state('share', {
-                url: '/share',
-                templateUrl: 'app/share/share.html',
-                controller: 'ShareController',
-                controllerAs: 'vm'
             });
     };
 })();
