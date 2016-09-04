@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.notepad')
+        .module('app.core')
         .service('ApiService', ApiService);
 
     ApiService.$inject = ['$http', 'API_URL'];
