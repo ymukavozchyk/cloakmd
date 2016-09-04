@@ -26,7 +26,12 @@
         function saveNotes() {
             var saveResult = StorageService.setNotes(vm.notes);
             if (!saveResult) {
-                toaster.pop('error', 'Was not able to save notes');
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent('Was not able to save notes')
+                        .position('top right')
+                        .hideDelay(1500)
+                );
             }
         };
 
