@@ -1,17 +1,15 @@
 {
   "name": "cloakmd",
-  "description": "GitHub flavored markdown encrypted notes",
+  "description": "GitHub flavored markdown notes with a twist",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ymukavozchyk/cloakmd"
+    "url": "https://github.com/ymukavozchyk/cloakmd-client"
   },
   "version": "0.0.1",
   "dependencies": {
     "express": "*",
-    "mongoose": "*",
     "compression": "*",
-    "body-parser":  "*",
     "gulp": "*",
     "gulp-sass": "*",
     "bower": "*"
