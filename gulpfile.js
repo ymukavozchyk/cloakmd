@@ -17,7 +17,7 @@ gulp.task('browser-sync', ['nodemon'], function() {
 
 gulp.task('nodemon', ['sass-dev'], function () {
   nodemon({
-    script: 'dev-server.js',
+    script: 'server.js',
     ignore: [ 'public/', 'node_modules/' ]
   });
 });
