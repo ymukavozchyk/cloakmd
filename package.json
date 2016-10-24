@@ -12,10 +12,10 @@
     "compression": "*",
     "gulp": "*",
     "gulp-sass": "*",
-    "bower": "*"
+    "bower": "*",
+    "morgan": "*"
   },
-  "devDependencies": {
-    "morgan": "*",
+  "devDependencies": {    
     "gulp-nodemon": "*",
     "browser-sync": "*"
   },
