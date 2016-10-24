@@ -9,7 +9,7 @@
     function ShareDetailsController(ApiService, SharedStorageService, $mdDialog, $mdToast, sharedNoteId) {
         var vm = this;
 
-        vm.sharedNoteLink = 'http://localhost:3000/#/shared/' + sharedNoteId;
+        vm.sharedNoteLink = window.location.protocol + '//' + window.location.hostname + '#/shared/' + sharedNoteId;
 
         function toastWrap(text) {
             $mdToast.show(

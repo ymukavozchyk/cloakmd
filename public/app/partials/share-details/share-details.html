@@ -7,10 +7,7 @@
 	<md-content layout-padding>
 
 		<div>
-			<md-input-container class="md-block">
-				<label>Link</label>
-				<input md-no-asterisk ng-model="vm.sharedNoteLink" readonly autofocus>
-			</md-input-container>
+			<h3>Link to the shared note</h3>
 			<a target="_blank" ng-href="vm.sharedNoteLink">{{ vm.sharedNoteLink }}</a>
 		</div>
 
@@ -20,7 +17,7 @@
 			</md-button>
 			<span flex></span>
 			<md-button class="md-raised md-warn" ng-click="vm.destroyNote()">
-				Destroy
+				Remove Note
 			</md-button>
 		</div>
 
