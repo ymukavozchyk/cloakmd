@@ -5,35 +5,70 @@
         .module('app.share')
         .controller('ShareController', ShareController);
 
-    ShareController.$inject = ['SharingService', '$mdDialog'];
-    function ShareController(SharingService, $mdDialog) {
+    ShareController.$inject = ['ApiService', 'SharedStorageService', '$mdDialog', '$mdToast', 'noteToShare'];
+    function ShareController(ApiService, SharedStorageService, $mdDialog, $mdToast, noteToShare, event) {
         var vm = this;
-        var today = new Date();
 
-        vm.note = SharingService.getNoteForSharing();
-        vm.password = {};
-
-        vm.isExpirable = false;
-        vm.minDate = new Date(
-            today.getFullYear(),
-            today.getMonth(),
-            today.getDate() + 1
-        );
-        vm.expirationDate = vm.minDate;
-
+        vm.password = '';
         vm.destroyAfterReading = false;
 
-        activate();
+        vm.hideProgressBar = true;
+        vm.controlsDisabled = false;
 
-        function activate() {
+        function toastWrap(text) {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(text)
+                    .position('top right')
+                    .hideDelay(4000)
+            );
         };
 
-        vm.closeDialog = function(){
+        function openDetailsDialog(sharedNoteId){
+            $mdDialog.show({
+                templateUrl: 'app/partials/share-details/share-details.html',
+                targetEvent: event,
+                controller: 'ShareDetailsController as vm',
+                locals: {
+                    sharedNoteId: sharedNoteId
+                }
+            });
+        };
+
+        vm.closeDialog = function () {
             $mdDialog.cancel();
         };
 
-        vm.shareNote = function(){
-            console.log(vm.expirationDate);
+        vm.shareNote = function () {
+            vm.hideProgressBar = false;
+            vm.controlsDisabled = true;
+            try {
+                var jsonData = angular.toJson(noteToShare);
+                var encryptedData = sjcl.encrypt(vm.password, jsonData);
+                var shareData = {
+                    Data: encryptedData,
+                    DestroyAfterReading: vm.destroyAfterReading
+                };
+
+                ApiService.share(shareData)
+                    .success(function (sharedId) {
+                        SharedStorageService.addNote({
+                            data: noteToShare.data,
+                            title: noteToShare.title,
+                            id: sharedId
+                        });
+                        openDetailsDialog(sharedId);
+                        $mdDialog.cancel();
+                    })
+                    .error(function (e) {
+                        toastWrap(e);
+                    });
+            }
+            catch (e) {
+                vm.hideProgressBar = true;
+                vm.controlsDisabled = false;
+                toastWrap('Was not able to encrypt note with given password');
+            }
         };
     }
 })();

@@ -5,8 +5,8 @@
         .module('app.notepad')
         .controller('NotepadController', NotepadController);
 
-    NotepadController.$inject = ['$mdDialog', '$mdMedia', '$mdSidenav', '$state', 'StorageService', 'ApiService', 'CredentialService', 'SharingService'];
-    function NotepadController($mdDialog, $mdMedia, $mdSidenav, $state, StorageService, ApiService, CredentialService, SharingService) {
+    NotepadController.$inject = ['$mdDialog', '$mdMedia', '$mdSidenav', '$mdToast', '$state', 'NotepadStorageService'];
+    function NotepadController($mdDialog, $mdMedia, $mdSidenav, $mdToast, $state, NotepadStorageService) {
         var vm = this;
 
         vm.notes = null;
@@ -18,21 +18,29 @@
         activate();
 
         function activate() {
-            vm.notes = StorageService.getNotes();
+            vm.notes = NotepadStorageService.getNotes();
             vm.note = vm.notes[0];
-            SharingService.reset();
+        };
+
+        function toastWrap(text) {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(text)
+                    .position('top right')
+                    .hideDelay(4000)
+            );
+        };
+
+        function storeNotes() {
+            var storeResult = NotepadStorageService.setNotes(vm.notes);
+            if (!storeResult) {
+                toastWrap('Was not able to save notes');
+            }
         };
 
         function saveNotes() {
-            var saveResult = StorageService.setNotes(vm.notes);
-            if (!saveResult) {
-                $mdToast.show(
-                    $mdToast.simple()
-                        .textContent('Was not able to save notes')
-                        .position('top right')
-                        .hideDelay(1500)
-                );
-            }
+            vm.notes[vm.index] = vm.note;
+            storeNotes();
         };
 
         vm.toggleList = function () {
@@ -44,11 +52,20 @@
         };
 
         vm.openSharingDialog = function (ev) {
-            $mdDialog.show({
-                templateUrl: 'app/notepad/share/share.html',
-                targetEvent: ev,
-                controller: 'ShareController as vm'
-            });
+            if (vm.note.data !== '') {
+                $mdDialog.show({
+                    templateUrl: 'app/notepad/share/share.html',
+                    targetEvent: ev,
+                    controller: 'ShareController as vm',
+                    locals: {
+                        noteToShare: vm.note,
+                        event: ev
+                    }
+                });
+            }
+            else {
+                toastWrap('You could not share an empty note');
+            }
         };
 
         vm.aceLoaded = function (editor) {
@@ -72,19 +89,16 @@
         };
 
         vm.aceChanged = function () {
-            vm.notes[vm.index] = vm.note;
             saveNotes();
         };
 
         vm.titleChanged = function () {
-            vm.notes[vm.index] = vm.note;
             saveNotes();
         };
 
         vm.titleBlur = function () {
-            if (vm.note.title == '') {
+            if (vm.note.title === '') {
                 vm.note.title = 'Untitled';
-                vm.notes[vm.index] = vm.note;
                 saveNotes();
             }
         };
@@ -117,8 +131,6 @@
         };
 
         vm.exit = function () {
-            StorageService.reset();
-            CredentialService.reset();
             $state.go('setup');
         }
     }

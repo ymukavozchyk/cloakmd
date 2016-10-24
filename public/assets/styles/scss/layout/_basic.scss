@@ -4,3 +4,11 @@ html, body {
   margin: 0px;
   padding: 0px;
 }
+
+.logo-link{
+  &:link, &:visited, &:hover, &:active{
+    color: #fff;
+    text-decoration: none;
+  }
+
+}

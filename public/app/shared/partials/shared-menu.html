@@ -1,0 +1,13 @@
+<md-menu>
+    <md-button aria-label="Open shared notes menu" class="md-icon-button" ng-click="vm.openMenu($mdOpenMenu, $event)">
+        <md-icon md-menu-origin md-svg-icon="notepad_menu"></md-icon>
+    </md-button>
+    <md-menu-content width="4">
+        <md-menu-item>
+            <md-button ui-sref="notepad">
+                <md-icon md-svg-icon="notepad" md-menu-align-target></md-icon>
+                Go to the notepad
+            </md-button>
+        </md-menu-item>
+    </md-menu-content>
+</md-menu>

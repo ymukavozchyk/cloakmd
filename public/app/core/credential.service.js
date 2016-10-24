@@ -22,7 +22,7 @@
         };
 
         function isPasswordPresent() {
-            if (password != null) {
+            if (password !== null) {
                 return true;
             }
             return false;

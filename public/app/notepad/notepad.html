@@ -1,10 +1,10 @@
 <md-toolbar layout="row">
-  <md-button class="menu" hide-gt-md ng-click="vm.toggleList()" aria-label="Show Notes">
+  <md-button class="menu" hide-gt-md ng-click="vm.toggleList()" aria-label="Show notepad">
     <md-icon md-svg-icon="show_notes"></md-icon>
   </md-button>
   <span flex></span>
   <div layout="row" layout-align="center center">
-    CloakMD
+    <a class="logo-link" ui-sref="notepad">CloakMD</a>
   </div>
   <span flex></span>
   <md-button ng-click="vm.exit()" aria-label="Exit">
@@ -18,7 +18,7 @@
   <md-sidenav ng-click="vm.toggleList()" md-is-locked-open="$mdMedia('gt-md')" md-component-id="left" class="md-whiteframe-z2">
     <md-toolbar>
       <div layout="row" layout-align="right center">
-        <h1 class="md-toolbar-tools">Notes</h1>
+        <h1 class="md-toolbar-tools">Notepad</h1>
         <div ng-include="'app/notepad/partials/notepad-menu.html'"></div>
       </div>
     </md-toolbar>
@@ -32,10 +32,17 @@
 
   <div flex layout="column">
     <md-content class="content" flex>
-      <md-input-container class="md-block">
-        <label>Title</label>
-        <input ng-model="vm.note.title" ng-change="vm.titleChanged()" ng-blur="vm.titleBlur()">
-      </md-input-container>
+
+      <div layout="row">
+        <md-input-container class="md-block" flex>
+          <label>Title</label>
+          <input ng-model="vm.note.title" ng-change="vm.titleChanged()" ng-blur="vm.titleBlur()">
+        </md-input-container>
+
+        <div>
+          <md-button ng-click="vm.openSharingDialog($event)" class="md-raised md-primary">Share</md-button>
+        </div>
+      </div>
 
       <div layout="row" layout-sm="column" layout-xs="column">
         <div layout-fill class="md-whiteframe-1dp" flex ui-ace="{ onLoad: vm.aceLoaded, onChange: vm.aceChanged }" ng-model="vm.note.data"

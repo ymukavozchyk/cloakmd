@@ -1,44 +1,41 @@
-<md-dialog aria-label="Share Note">
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <h2>Share Note</h2>
-    </div>
-  </md-toolbar>
-  <md-content layout-padding>
-    <form name="shareForm" ng-submit="vm.shareNote()">
+<md-dialog aria-label="Share Note" flex="30">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>Share Note</h2>
+		</div>
+	</md-toolbar>
+	<md-content layout-padding>
+		<form name="shareForm" ng-submit="vm.shareNote()">
 
-      <md-input-container class="md-block">
-        <label>Password</label>
-        <input md-maxlength="70" required md-no-asterisk name="password" ng-model="vm.sharingModel.password" type="password" autofocus>
-        <div ng-messages="shareForm.password.$error">
-          <div ng-message="required">This is required.</div>
-          <div ng-message="md-maxlength">The password must be less than 70 characters long.</div>
-        </div>
-      </md-input-container>
+			<md-progress-linear md-mode="query" ng-hide='vm.hideProgressBar'></md-progress-linear>
 
-      <div class="options-block" layout="row">
-        <div flex>
-          <md-checkbox aria-label="Expire on" ng-model="vm.isExpirable">
-            Expire on
-          </md-checkbox>
-          <md-datepicker ng-disabled="!vm.isExpirable" ng-model="vm.expirationDate" md-min-date="vm.minDate" md-placeholder="Expiration date"></md-datepicker>
-        </div>
-        <div flex>
-          <md-checkbox aria-label="Destroy after reading" ng-model="vm.destroyAfterReading">
-            Destroy after reading
-          </md-checkbox>
-        </div>
-      </div>
+			<md-input-container class="md-block">
+				<label>Password</label>
+				<input ng-disabled="vm.controlsDisabled" md-maxlength="70" required md-no-asterisk name="password" ng-model="vm.password"
+					type="password" autofocus>
+				<div ng-messages="shareForm.password.$error">
+					<div ng-message="required">This is required.</div>
+					<div ng-message="md-maxlength">The password must be less than 70 characters long.</div>
+				</div>
+			</md-input-container>
 
-      <div layout="row">
-        <md-button class="md-raised" ng-click="vm.closeDialog()">
-          Cancel
-        </md-button>
-        <span flex></span>
-        <md-button class="md-raised md-primary" ng-disabled="shareForm.$invalid" type="submit">
-          Share
-        </md-button>
-      </div>
-    </form>
-  </md-content>
+			<div class="options-block" layout="row">
+				<div flex>
+					<md-checkbox ng-disabled="vm.controlsDisabled" aria-label="Destroy after reading" ng-model="vm.destroyAfterReading">
+						Destroy after reading
+					</md-checkbox>
+				</div>
+			</div>
+
+			<div layout="row">
+				<md-button class="md-raised" ng-disabled="vm.controlsDisabled" ng-click="vm.closeDialog()">
+					Cancel
+				</md-button>
+				<span flex></span>
+				<md-button class="md-raised md-primary" ng-disabled="shareForm.$invalid || vm.controlsDisabled" type="submit">
+					Share
+				</md-button>
+			</div>
+		</form>
+	</md-content>
 </md-dialog>

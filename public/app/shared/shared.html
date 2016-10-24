@@ -1,26 +1,57 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-        aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-title">CloakMD</span>
-    </div>
+<md-toolbar layout="row">
+  <md-button class="menu" hide-gt-md ng-click="vm.toggleList()" aria-label="Show Shared Notes">
+    <md-icon md-svg-icon="show_notes"></md-icon>
+  </md-button>
+  <span flex></span>
+  <div layout="row" layout-align="center center">
+    <a class="logo-link" ui-sref="notepad">CloakMD</a>
   </div>
-</nav>
+  <span flex></span>
+  <md-button ng-click="vm.exit()" aria-label="Exit">
+    <md-icon md-svg-icon="exit"></md-icon>
+  </md-button>
+</md-toolbar>
 
-<div class="container-fluid">
-  <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-          <h1><span class="glyphicon glyphicon-file" aria-hidden="true"></span> {{ vm.note.title }}</h1>
+
+<div flex layout="row">
+
+  <md-sidenav ng-click="vm.toggleList()" md-is-locked-open="$mdMedia('gt-md')" md-component-id="left" class="md-whiteframe-z2">
+    <md-toolbar>
+      <div layout="row" layout-align="right center">
+        <h1 class="md-toolbar-tools">Shared Notes</h1>
+        <div ng-include="'app/shared/partials/shared-menu.html'"></div>
       </div>
-      <div class="col-md-8 col-md-offset-2">
-          <p class="markdown-body" markdown-to-html="vm.note.data"></p>
+    </md-toolbar>
+
+    <md-list>
+      <md-list-item ng-repeat="note in vm.notes" ng-click="vm.selectNote(note)" ng-class="{ selected: $index == vm.index }">
+        <h4>{{ note.title }}</h4>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
+
+  <div flex layout="column">
+    <md-content class="content" flex>
+
+      <div layout="row" ng-hide="vm.hideControls">
+        <md-input-container class="md-block" flex>
+          <label>Title</label>
+          <input ng-model="vm.note.title" readonly>
+        </md-input-container>
+
+        <div>
+          <md-button ng-click="vm.openDetailsDialog($event)" class="md-raised md-primary">Details</md-button>
+        </div>
       </div>
+
+      <div layout="row" layout-sm="column" layout-xs="column" ng-hide="vm.hideControls">
+        <div layout-fill class="md-whiteframe-1dp markdown-body" flex markdown-to-html="vm.note.data"></div>
+      </div>
+
+      <div layout="row" layout-align="center center" ng-show="vm.hideControls">
+        <h2>Nothing shared</h2>
+      </div>
+
+    </md-content>
   </div>
 </div>
-

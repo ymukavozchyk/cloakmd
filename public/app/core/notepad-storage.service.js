@@ -3,24 +3,24 @@
 
     angular
         .module('app.core')
-        .service('StorageService', StorageService);
+        .service('NotepadStorageService', NotepadStorageService);
 
-    StorageService.$inject = ['localStorageService', 'CredentialService', 'LS_NOTEPAD_COLLECTION'];
-    function StorageService(localStorageService, CredentialService, LS_NOTEPAD_COLLECTION) {
+    NotepadStorageService.$inject = ['localStorageService', 'CredentialService', 'LS_NOTEPAD_COLLECTION'];
+    function NotepadStorageService(localStorageService, CredentialService, LS_NOTEPAD_COLLECTION) {
         var sampleData =
             '# CloakMD\n' +
             'GitHub flavored markdown notes with a twist\n';
         var sampleNotes = [{
             title: 'Untitled',
-            data: sampleData,
-            publicKey: null
+            data: sampleData
         }];
+
         var localStorageData = null;
         var notes = null;
 
         var service = {
             reset: reset,
-            resetNotes: resetNotes,
+            resetStorage: resetStorage,
 
             areNotesPresent: areNotesPresent,
 
@@ -31,21 +31,21 @@
 
         return service;
 
-        function reset(){
+        function reset() {
             localStorageData = null;
             notes = null;
         };
 
+        function resetStorage() {
+            localStorageService.remove(LS_NOTEPAD_COLLECTION);
+        };
+
         function areNotesPresent() {
             localStorageData = localStorageService.get(LS_NOTEPAD_COLLECTION);
-            if (localStorageData != null) {
+            if (localStorageData !== null) {
                 return true;
             }
             return false;
-        };
-
-        function resetNotes() {
-            localStorageService.clearAll();
         };
 
         function setNotes(data) {
@@ -62,7 +62,7 @@
         };
 
         function getNotes() {
-            if (notes != null) {
+            if (notes !== null) {
                 return notes;
             }
             return sampleNotes;

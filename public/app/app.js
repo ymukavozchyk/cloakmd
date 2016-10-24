@@ -5,8 +5,8 @@
         .module('app')
         .controller('ApplicationController', ApplicationController);
 
-    ApplicationController.$inject = ['$state', '$rootScope', 'CredentialService', 'SharingService'];
-    function ApplicationController($state, $rootScope, CredentialService, SharingService) {
+    ApplicationController.$inject = ['$state', '$rootScope', 'CredentialService'];
+    function ApplicationController($state, $rootScope, CredentialService) {
         var vm = this;
 
         activate();
@@ -16,16 +16,10 @@
         }
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-            if (toState.name == 'notepad') {
+            if (toState.name == 'notepad' || toState.name == 'shared') {
                 if (!CredentialService.isPasswordPresent()) {
                     event.preventDefault();
                     $state.go('setup');
-                }
-            }
-            else if (toState.name == 'share') {
-                if (!SharingService.isNoteSelectedForSharing()) {
-                    event.preventDefault();
-                    $state.go('notepad');
                 }
             }
         });

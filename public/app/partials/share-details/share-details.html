@@ -1,0 +1,28 @@
+<md-dialog aria-label="Shared Note Details" flex="30">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>Shared Note Details</h2>
+		</div>
+	</md-toolbar>
+	<md-content layout-padding>
+
+		<div>
+			<md-input-container class="md-block">
+				<label>Link</label>
+				<input md-no-asterisk ng-model="vm.sharedNoteLink" readonly autofocus>
+			</md-input-container>
+			<a target="_blank" ng-href="vm.sharedNoteLink">{{ vm.sharedNoteLink }}</a>
+		</div>
+
+		<div layout="row">
+			<md-button class="md-raised" ng-click="vm.closeDialog()">
+				Cancel
+			</md-button>
+			<span flex></span>
+			<md-button class="md-raised md-warn" ng-click="vm.destroyNote()">
+				Destroy
+			</md-button>
+		</div>
+
+	</md-content>
+</md-dialog>

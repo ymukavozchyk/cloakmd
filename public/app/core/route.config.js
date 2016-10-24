@@ -3,11 +3,11 @@
 
     angular
         .module('app.core')
-        .config(Config);
+        .config(RouteConfig);
 
-    Config.$inject = ['$stateProvider'];
+    RouteConfig.$inject = ['$stateProvider'];
 
-    function Config($stateProvider) {
+    function RouteConfig($stateProvider) {
         $stateProvider
             .state('setup', {
                 url: '/',
@@ -19,6 +19,12 @@
                 url: '/notepad',
                 templateUrl: 'app/notepad/notepad.html',
                 controller: 'NotepadController',
+                controllerAs: 'vm'
+            })
+            .state('shared', {
+                url: '/shared',
+                templateUrl: 'app/shared/shared.html',
+                controller: 'SharedController',
                 controllerAs: 'vm'
             });
     };
