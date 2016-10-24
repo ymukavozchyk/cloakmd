@@ -26,12 +26,13 @@
             }
         };
 
-        function toastWrap(text) {
+        function showToast(text, type) {
             $mdToast.show(
                 $mdToast.simple()
                     .textContent(text)
                     .position('top right')
-                    .hideDelay(4000)
+                    .hideDelay(6000)
+                    .toastClass(type)
             );
         };
 
@@ -47,7 +48,7 @@
                         return true;
                     }
                     else {
-                        toastWrap('Was not able to decrypt notes with given master password');
+                        showToast('Was not able to decrypt notes with given master password', 'error');
                         return false;
                     }
                 }

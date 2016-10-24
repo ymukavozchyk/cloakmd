@@ -27,15 +27,6 @@
             }
         };
 
-        function toastWrap(text) {
-            $mdToast.show(
-                $mdToast.simple()
-                    .textContent(text)
-                    .position('top right')
-                    .hideDelay(4000)
-            );
-        };
-
         vm.toggleList = function () {
             $mdSidenav('left').toggle();
         };
@@ -56,7 +47,8 @@
                 controller: 'ShareDetailsController as vm',
                 locals: {
                     sharedNoteId: vm.note.id
-                }
+                },
+                clickOutsideToClose : true
             })
                 .then(function () {
                     vm.notes.splice(vm.index, 1);

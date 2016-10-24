@@ -22,19 +22,20 @@
             vm.note = vm.notes[0];
         };
 
-        function toastWrap(text) {
+        function showToast(text, type) {
             $mdToast.show(
                 $mdToast.simple()
                     .textContent(text)
                     .position('top right')
-                    .hideDelay(4000)
+                    .hideDelay(6000)
+                    .toastClass(type)
             );
         };
 
         function storeNotes() {
             var storeResult = NotepadStorageService.setNotes(vm.notes);
             if (!storeResult) {
-                toastWrap('Was not able to save notes');
+                showToast('Was not able to save notes', 'error');
             }
         };
 
@@ -60,11 +61,12 @@
                     locals: {
                         noteToShare: vm.note,
                         event: ev
-                    }
+                    },
+                    clickOutsideToClose : true
                 });
             }
             else {
-                toastWrap('You could not share an empty note');
+                showToast('You could not share an empty note', 'error');
             }
         };
 

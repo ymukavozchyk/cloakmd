@@ -11,12 +11,13 @@
 
         vm.sharedNoteLink = window.location.protocol + '//' + window.location.hostname + '#/shared/' + sharedNoteId;
 
-        function toastWrap(text) {
+        function showToast(text, type) {
             $mdToast.show(
                 $mdToast.simple()
                     .textContent(text)
                     .position('top right')
-                    .hideDelay(4000)
+                    .hideDelay(6000)
+                    .toastClass(type)
             );
         };
 
@@ -31,7 +32,7 @@
                     $mdDialog.hide();
                 })
                 .error(function (e) {
-                    toastWrap(e.Message);
+                    showToast(e.Message, 'error');
                 });
         };
     }

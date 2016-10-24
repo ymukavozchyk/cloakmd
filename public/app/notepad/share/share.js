@@ -15,12 +15,13 @@
         vm.hideProgressBar = true;
         vm.controlsDisabled = false;
 
-        function toastWrap(text) {
+        function showToast(text, type) {
             $mdToast.show(
                 $mdToast.simple()
                     .textContent(text)
                     .position('top right')
-                    .hideDelay(4000)
+                    .hideDelay(6000)
+                    .toastClass(type)
             );
         };
 
@@ -31,7 +32,8 @@
                 controller: 'ShareDetailsController as vm',
                 locals: {
                     sharedNoteId: sharedNoteId
-                }
+                },
+                clickOutsideToClose : true
             });
         };
 
@@ -61,13 +63,13 @@
                         $mdDialog.cancel();
                     })
                     .error(function (e) {
-                        toastWrap(e);
+                        showToast(e, 'error');
                     });
             }
             catch (e) {
                 vm.hideProgressBar = true;
                 vm.controlsDisabled = false;
-                toastWrap('Was not able to encrypt note with given password');
+                showToast('Was not able to encrypt note with given password', 'error');
             }
         };
     }
