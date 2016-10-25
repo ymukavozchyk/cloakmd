@@ -12,6 +12,8 @@
         vm.notes = null;
         vm.index = 0;
         vm.note = null;
+
+        vm.noteIsEmpty = true;
         vm.isScreenXs = $mdMedia('xs');
         vm.isScreenSm = $mdMedia('sm');
 
@@ -20,6 +22,7 @@
         function activate() {
             vm.notes = NotepadStorageService.getNotes();
             vm.note = vm.notes[0];
+            checkNoteIsEmpty();
         };
 
         function showToast(text, type) {
@@ -32,6 +35,15 @@
             );
         };
 
+        function checkNoteIsEmpty() {
+            if (vm.note.data === '') {
+                vm.noteIsEmpty = true;
+            }
+            else {
+                vm.noteIsEmpty = false;
+            }
+        };
+
         function storeNotes() {
             var storeResult = NotepadStorageService.setNotes(vm.notes);
             if (!storeResult) {
@@ -40,6 +52,7 @@
         };
 
         function saveNotes() {
+            checkNoteIsEmpty();
             vm.notes[vm.index] = vm.note;
             storeNotes();
         };
@@ -53,21 +66,16 @@
         };
 
         vm.openSharingDialog = function (ev) {
-            if (vm.note.data !== '') {
-                $mdDialog.show({
-                    templateUrl: 'app/notepad/share/share.html',
-                    targetEvent: ev,
-                    controller: 'ShareController as vm',
-                    locals: {
-                        noteToShare: vm.note,
-                        event: ev
-                    },
-                    clickOutsideToClose : true
-                });
-            }
-            else {
-                showToast('You could not share an empty note', 'error');
-            }
+            $mdDialog.show({
+                templateUrl: 'app/notepad/share/share.html',
+                targetEvent: ev,
+                controller: 'ShareController as vm',
+                locals: {
+                    noteToShare: vm.note,
+                    event: ev
+                },
+                clickOutsideToClose: true
+            });
         };
 
         vm.aceLoaded = function (editor) {
@@ -114,6 +122,7 @@
 
             vm.index = vm.notes.indexOf(newNote);
             vm.note = newNote;
+            checkNoteIsEmpty();
         };
 
         vm.removeCurrentNote = function () {
@@ -130,6 +139,7 @@
         vm.selectNote = function (note) {
             vm.index = vm.notes.indexOf(note);
             vm.note = note;
+            checkNoteIsEmpty();
         };
 
         vm.exit = function () {
