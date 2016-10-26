@@ -1,17 +1,18 @@
 <md-menu>
 	<md-button aria-label="Open notepad menu" class="md-icon-button" ng-click="vm.openMenu($mdOpenMenu, $event)">
 		<md-icon md-menu-origin md-svg-icon="notepad_menu"></md-icon>
+		<md-tooltip>Open menu</md-tooltip>
 	</md-button>
 	<md-menu-content width="4">
 		<md-menu-item>
-			<md-button ng-click="vm.addNewNote()">
+			<md-button aria-label="Add note" ng-click="vm.addNewNote()">
 				<md-icon md-svg-icon="add" md-menu-align-target></md-icon>
 				Add note
 			</md-button>
 		</md-menu-item>
 		<md-menu-divider></md-menu-divider>
         <md-menu-item>
-			<md-button ui-sref="shared">
+			<md-button aria-label="Go to shared notes" ui-sref="shared">
 				<md-icon md-svg-icon="shared_notes" md-menu-align-target></md-icon>
 				Go to shared notes
 			</md-button>

@@ -1,6 +1,7 @@
 <md-toolbar layout="row">
-  <md-button class="menu" hide-gt-md ng-click="vm.toggleList()" aria-label="Show Shared Notes">
+  <md-button class="menu" hide-gt-md ng-click="vm.toggleList()" aria-label="Show menu">
     <md-icon md-svg-icon="show_notes"></md-icon>
+    <md-tooltip>Show menu</md-tooltip>
   </md-button>
   <span flex></span>
   <div layout="row" layout-align="center center">
@@ -9,6 +10,7 @@
   <span flex></span>
   <md-button ng-click="vm.exit()" aria-label="Exit">
     <md-icon md-svg-icon="exit"></md-icon>
+    <md-tooltip>Exit</md-tooltip>
   </md-button>
 </md-toolbar>
 
@@ -40,7 +42,7 @@
         </md-input-container>
 
         <div>
-          <md-button ng-click="vm.openDetailsDialog($event)" class="md-raised md-primary">Details</md-button>
+          <md-button aria-label="Details" ng-click="vm.openDetailsDialog($event)" class="md-raised md-primary">Details</md-button>
         </div>
       </div>
 

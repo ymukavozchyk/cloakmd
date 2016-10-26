@@ -10,8 +10,8 @@
 			<md-progress-linear md-mode="query" ng-hide='vm.hideProgressBar'></md-progress-linear>
 
 			<md-input-container class="md-block">
-				<label>Password</label>
-				<input ng-disabled="vm.controlsDisabled" md-maxlength="70" required md-no-asterisk name="password" ng-model="vm.password"
+				<label for="passwordInput">Password</label>
+				<input id="passwordInput" ng-disabled="vm.controlsDisabled" md-maxlength="70" required md-no-asterisk name="password" ng-model="vm.password"
 					type="password" autofocus>
 				<div ng-messages="shareForm.password.$error">
 					<div ng-message="required">This is required.</div>
@@ -21,18 +21,18 @@
 
 			<div class="options-block" layout="row">
 				<div flex>
-					<md-checkbox ng-disabled="vm.controlsDisabled" aria-label="Destroy after reading" ng-model="vm.destroyAfterReading">
+					<md-checkbox aria-label="Destroy after reading" ng-disabled="vm.controlsDisabled" aria-label="Destroy after reading" ng-model="vm.destroyAfterReading">
 						Destroy after reading
 					</md-checkbox>
 				</div>
 			</div>
 
 			<div layout="row">
-				<md-button class="md-raised" ng-disabled="vm.controlsDisabled" ng-click="vm.closeDialog()">
+				<md-button aria-label="Cancel" class="md-raised" ng-disabled="vm.controlsDisabled" ng-click="vm.closeDialog()">
 					Cancel
 				</md-button>
 				<span flex></span>
-				<md-button class="md-raised md-primary" ng-disabled="shareForm.$invalid || vm.controlsDisabled" type="submit">
+				<md-button aria-label="Share" class="md-raised md-primary" ng-disabled="shareForm.$invalid || vm.controlsDisabled" type="submit">
 					Share
 				</md-button>
 			</div>
