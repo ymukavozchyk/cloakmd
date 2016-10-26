@@ -2,7 +2,9 @@
     'use strict';
 
     angular
-        .module('app.setup', [
+        .module('app.setup',
+        [
+            'ngMaterial',
             'ngMessages'
         ]);
 })();

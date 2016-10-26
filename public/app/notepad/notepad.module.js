@@ -2,9 +2,11 @@
     'use strict';
 
     angular
-        .module('app.notepad', [
-            'LocalStorageModule',
-            'ui.ace',
-            'ng-showdown'
+        .module('app.notepad',
+        [
+            'ngMaterial',
+            'ngMessages',
+            'ng-showdown',
+            'ui.ace'
         ]);
 })();

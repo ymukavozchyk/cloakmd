@@ -2,8 +2,10 @@
     'use strict';
 
     angular
-        .module('app.shared', [
-            'LocalStorageModule',
+        .module('app.shared',
+        [
+            'ngMaterial',
+            'ngMessages',
             'ng-showdown'
         ]);
 })();

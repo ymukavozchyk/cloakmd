@@ -1,5 +1,10 @@
 (function () {
     'use strict';
 
-    angular.module('app.share', []);
+    angular
+        .module('app.share',
+        [
+            'ngMaterial',
+            'ngMessages'
+        ]);
 })();
