@@ -12,6 +12,11 @@
     "compression": "*",
     "gulp": "*",
     "gulp-sass": "*",
+    "gulp-uglify": "*",
+    "gulp-concat": "*",
+    "gulp-clean": "*",
+    "gulp-cssmin": "*",
+    "gulp-html-replace": "*",
     "bower": "*",
     "morgan": "*"
   },
@@ -24,6 +29,6 @@
   },
   "scripts": {
     "start": "node server.js",
-    "postinstall": "bower install && gulp build"
+    "postinstall": "bower install && gulp production"
   }
 }

@@ -8,9 +8,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 	<meta name="description" content="GitHub flavored markdown encrypted notes">
 
+	<!-- build:css -->
 	<link rel="stylesheet" href="assets/vendors/angular-material/angular-material.min.css">
 	<link rel="stylesheet" href="assets/vendors/github-markdown-css/github-markdown.css">
 	<link rel="stylesheet" href="assets/styles/css/build/main.css">
+	<!-- endbuild -->
 
 	<style type="text/css">
 		[ng\:cloak],
@@ -22,12 +24,12 @@
 			display: none !important;
 		}
 	</style>
-
 </head>
 
 <body layout="column" ng-cloak>
 	<div flex layout="column" ui-view></div>
 
+	<!-- build:js -->
 	<!-- Angular js -->
 	<script src="assets/vendors/angular/angular.min.js"></script>
 	<script src="assets/vendors/angular-animate/angular-animate.min.js"></script>
@@ -38,7 +40,7 @@
 	<!-- Angular Material -->
 	<script src="assets/vendors/angular-material/angular-material.min.js"></script>
 
-	<!-- 3rd party angular components -->
+	<!-- Angular UI Router -->
 	<script src="assets/vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
 
 	<!-- Markdown rendering engine -->
@@ -89,6 +91,8 @@
 
 	<script src="app/about/about.module.js"></script>
 	<script src="app/about/about.js"></script>
+	<!-- endbuild -->
+
 </body>
 
 </html>
