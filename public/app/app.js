@@ -12,7 +12,6 @@
         activate();
 
         function activate() {
-            $rootScope.copyrightYear = new Date();
             $state.go('setup');
         }
 
