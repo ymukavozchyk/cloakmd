@@ -1,8 +1,9 @@
+var nodemon;
+var browserSync;
+var jshint;
+
 var gulp = require('gulp');
-var nodemon = require('gulp-nodemon');
-var browserSync = require('browser-sync');
 var sass = require('gulp-sass');
-var jshint = require('gulp-jshint');
 
 
 gulp.task('default', ['browser-sync'], function () {
@@ -24,6 +25,9 @@ gulp.task('nodemon', ['sass-dev'], function () {
 });
 
 gulp.task('sass-dev', function () {
+  nodemon = require('gulp-nodemon');
+  browserSync = require('browser-sync');
+
   return gulp.src('public/assets/styles/scss/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('public/assets/styles/css/build'))
@@ -39,6 +43,7 @@ gulp.task('build', function () {
 });
 
 gulp.task('lint', function () {
+  jshint = require('gulp-jshint');
   gulp.src('public/app/**/*.js')
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'))
