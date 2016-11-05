@@ -96,6 +96,7 @@ gulp.task('bundle-js-vendors', function () {
         'public/assets/vendors/ng-showdown/dist/ng-showdown.min.js',
         'public/assets/vendors/ace-builds/src-min-noconflict/ace.js',
         'public/assets/vendors/ace-builds/src-min-noconflict/theme-github.js',
+        'public/assets/vendors/ace-builds/src-min-noconflict/mode-markdown.js',
         'public/assets/vendors/angular-ui-ace/ui-ace.min.js',
         'public/assets/vendors/sjcl/sjcl.js'
     ])
