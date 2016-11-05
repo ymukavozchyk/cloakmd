@@ -18,6 +18,7 @@
         vm.note = null;
 
         vm.noteIsEmpty = true;
+        vm.hideLoader = false;
 
         activate();
 
@@ -45,6 +46,7 @@
         function selectFirstNote() {
             vm.note = vm.notes[0];
             checkNoteIsEmpty();
+            vm.hideLoader = true;
         }
 
         function showToast(text, type) {

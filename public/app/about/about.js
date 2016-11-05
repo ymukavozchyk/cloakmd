@@ -10,6 +10,7 @@
         var vm = this;
 
         vm.data = '';
+        vm.hideLoader = false;
 
         activate();
 
@@ -19,6 +20,7 @@
 
         function setAboutData(res){
             vm.data = res.data;
+            vm.hideLoader = true;
         }
     }
 })();

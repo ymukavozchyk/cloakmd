@@ -40,7 +40,12 @@
 	</md-sidenav>
 
 	<div flex layout="column">
-		<md-content class="content" flex>
+
+		<div layout="row" layout-sm="column" layout-align="center center" ng-hide="vm.hideLoader" flex>
+            <md-progress-circular md-mode="indeterminate" md-diameter="70"></md-progress-circular>
+        </div>
+
+		<md-content class="content" ng-show="vm.hideLoader" flex>
 
 			<div layout="row" layout-sm="column" layout-xs="column">
 				<md-input-container class="md-block" flex>
