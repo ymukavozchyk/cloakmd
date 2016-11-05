@@ -5,27 +5,10 @@ html, body {
   padding: 0px;
 }
 
-.logo-link{
-  &:link, &:visited, &:hover, &:active{
-    color: #fff;
-    text-decoration: none;
-  }
-
-}
-
-md-toast {
-  &.error {
-    .md-toast-content {
-      background: rgb(244, 67, 54);
-      color: white;
-    }
-  }
-  &.success {
-    .md-toast-content {
-      background: rgb(76, 175, 80);
-      color: white;
-    }
-  }
+.content  {
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 5px;
 }
 
 .buttons_stacked {
@@ -46,31 +29,8 @@ md-toast {
   }
 }
 
-.link {
-    color: #265C83;
-    text-decoration: none;
-
-    &:link, &:visited {
-      color: #265C83;
-    }
-
-    &:hover, &:active{
-      color: #007BE6;
-    }
-}
-
-.neutral-warning-text{
-  text-align: center;
-  color: #757575;
-}
-
-.warning-text {
-  text-align: center;
-  color: #f44336;
-}
-
-.warning-icon svg {
-  fill: #f44336;
+md-list .selected{
+    background-color: rgb(230, 230, 230);
 }
 
 .about-md{
