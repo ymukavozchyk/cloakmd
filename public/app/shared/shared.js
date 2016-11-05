@@ -5,16 +5,16 @@
         .module('app.shared')
         .controller('SharedController', SharedController);
 
-    SharedController.$inject = ['$mdDialog', '$mdMedia', '$mdSidenav', '$mdToast', '$state', 'SharedStorageService'];
-    function SharedController($mdDialog, $mdMedia, $mdSidenav, $mdToast, $state, SharedStorageService) {
+    SharedController.$inject = ['$scope', '$mdDialog', '$mdMedia', '$mdSidenav', '$mdToast', '$state', 'SharedStorageService'];
+    function SharedController($scope, $mdDialog, $mdMedia, $mdSidenav, $mdToast, $state, SharedStorageService) {
         var vm = this;
+
+        $scope.$mdMedia = $mdMedia;
 
         vm.notes = null;
         vm.index = 0;
         vm.note = null;
         vm.hideControls = false;
-        vm.isScreenXs = $mdMedia('xs');
-        vm.isScreenSm = $mdMedia('sm');
 
         activate();
 
@@ -25,7 +25,7 @@
             if (vm.note === undefined) {
                 vm.hideControls = true;
             }
-        };
+        }
 
         vm.toggleList = function () {
             $mdSidenav('left').toggle();
@@ -48,7 +48,7 @@
                 locals: {
                     sharedNoteId: vm.note.id
                 },
-                clickOutsideToClose : true
+                clickOutsideToClose: true
             })
                 .then(function () {
                     vm.notes.splice(vm.index, 1);
@@ -63,6 +63,6 @@
 
         vm.exit = function () {
             $state.go('setup');
-        }
+        };
     }
 })();

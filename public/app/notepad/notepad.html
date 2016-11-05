@@ -1,14 +1,16 @@
-<md-toolbar layout="row">
-	<md-button class="menu" hide-gt-md ng-click="vm.toggleList()" aria-label="Show menu">
-		<md-icon md-svg-icon="show_notes"></md-icon>
-		<md-tooltip>Show menu</md-tooltip>
+<md-toolbar layout="row" layout-align="center center">
+	<md-button class="md-icon-button" hide-gt-md ng-click="vm.toggleList()" aria-label="Show notes">
+		<md-icon md-svg-icon="notepad_menu"></md-icon>
+		<md-tooltip>Show notes</md-tooltip>
+	</md-button>
+	<md-button class="md-icon-button" ui-sref="shared" aria-label="Shared notes">
+		<md-icon md-svg-icon="shared_notes"></md-icon>
+		<md-tooltip>Shared notes</md-tooltip>
 	</md-button>
 	<span flex></span>
-	<div layout="row" layout-align="center center">
-		<a class="logo-link" ui-sref="notepad">CloakMD</a>
-	</div>
+	<a class="logo-link" ui-sref="notepad">CloakMD</a>
 	<span flex></span>
-	<md-button ng-click="vm.exit()" aria-label="Exit">
+	<md-button class="md-icon-button" ng-click="vm.exit()" aria-label="Exit">
 		<md-icon md-svg-icon="exit"></md-icon>
 		<md-tooltip>Exit</md-tooltip>
 	</md-button>
@@ -21,7 +23,12 @@
 		<md-toolbar>
 			<div layout="row" layout-align="right center">
 				<h1 class="md-toolbar-tools">Notepad</h1>
-				<div ng-include="'app/notepad/partials/notepad-menu.html'"></div>
+				<div>
+					<md-button class="md-icon-button" aria-label="Add note" ng-click="vm.addNewNote()">
+						<md-icon md-svg-icon="add"></md-icon>
+						<md-tooltip>Add note</md-tooltip>
+					</md-button>
+				</div>
 			</div>
 		</md-toolbar>
 
@@ -35,23 +42,29 @@
 	<div flex layout="column">
 		<md-content class="content" flex>
 
-			<div layout="row">
+			<div layout="row" layout-sm="column" layout-xs="column">
 				<md-input-container class="md-block" flex>
 					<label for="noteTitle">Title</label>
 					<input id="noteTitle" ng-model="vm.note.title" ng-change="vm.titleChanged()" ng-blur="vm.titleBlur()">
 				</md-input-container>
 
 				<div>
-					<md-button aria-label="Share note" ng-click="vm.openSharingDialog($event)" ng-disabled="vm.noteIsEmpty" class="md-raised md-primary">Share</md-button>
-					<md-button aria-label="Delete note" ng-click="vm.removeCurrentNote()" class="md-raised md-warn">Delete</md-button>
+					<div layout="row" layout-align-xs="space-between" ng-class="{ buttons_stacked: $mdMedia('xs') || $mdMedia('sm') }">
+						<md-button aria-label="Share note" ng-click="vm.openSharingDialog($event)" ng-disabled="vm.noteIsEmpty" class="md-raised md-primary">Share</md-button>
+						<md-button aria-label="Delete note" ng-click="vm.removeCurrentNote()" class="md-raised md-warn">Delete</md-button>
+					</div>
 				</div>
+
 			</div>
 
 			<div layout="row" layout-sm="column" layout-xs="column">
 				<div layout-fill class="md-whiteframe-1dp" flex ui-ace="{ onLoad: vm.aceLoaded, onChange: vm.aceChanged }" ng-model="vm.note.data"
-					ng-class="{ ace_editor_stacked: vm.isScreenXs || vm.isScreenSm }"></div>
+					ng-class="{ ace_editor_stacked: $mdMedia('xs') || $mdMedia('sm') }"></div>
 				<div layout-fill class="md-whiteframe-1dp markdown-body" flex markdown-to-html="vm.note.data"></div>
 			</div>
 		</md-content>
+
+		<div ng-include="'app/partials/footer/footer.html'"></div>
+
 	</div>
 </div>

@@ -1,0 +1,31 @@
+<md-dialog aria-label="Decrypt Note" flex="30">
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>Decrypt Note</h2>
+		</div>
+	</md-toolbar>
+	<md-content layout-padding>
+		<form name="decryptForm" ng-submit="vm.decryptNote()">
+
+			<md-input-container class="md-block">
+				<label for="passwordInput">Password</label>
+				<input id="passwordInput" md-maxlength="70" required md-no-asterisk name="password" ng-model="vm.password"
+					type="password" autofocus>
+				<div ng-messages="decryptForm.password.$error">
+					<div ng-message="required">This is required.</div>
+					<div ng-message="md-maxlength">The password must be less than 70 characters long.</div>
+				</div>
+			</md-input-container>
+
+			<div layout="row">
+				<md-button aria-label="Cancel" class="md-raised" ng-click="vm.closeDialog()">
+					Cancel
+				</md-button>
+				<span flex></span>
+				<md-button aria-label="Decrypt" class="md-raised md-primary" ng-disabled="shareForm.$invalid" type="submit">
+					Decrypt
+				</md-button>
+			</div>
+		</form>
+	</md-content>
+</md-dialog>

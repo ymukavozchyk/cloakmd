@@ -19,21 +19,21 @@
 
         function reset(){
             password = null;
-        };
+        }
 
         function isPasswordPresent() {
             if (password !== null) {
                 return true;
             }
             return false;
-        };
+        }
 
         function setPassword(value) {
             password = value;
-        };
+        }
 
         function getPassword() {
             return password;
-        };
-    };
+        }
+    }
 })();

@@ -15,9 +15,12 @@
     "bower": "*",
     "morgan": "*"
   },
-  "devDependencies": {    
+  "devDependencies": {
     "gulp-nodemon": "*",
-    "browser-sync": "*"
+    "browser-sync": "*",
+    "jshint": "*",
+    "gulp-jshint": "*",
+    "jshint-stylish": "*"
   },
   "scripts": {
     "start": "node server.js",

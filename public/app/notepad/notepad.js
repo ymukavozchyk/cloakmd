@@ -5,17 +5,17 @@
         .module('app.notepad')
         .controller('NotepadController', NotepadController);
 
-    NotepadController.$inject = ['$mdDialog', '$mdMedia', '$mdSidenav', '$mdToast', '$state', 'NotepadStorageService'];
-    function NotepadController($mdDialog, $mdMedia, $mdSidenav, $mdToast, $state, NotepadStorageService) {
+    NotepadController.$inject = ['$scope', '$mdDialog', '$mdMedia', '$mdSidenav', '$mdToast', '$state', 'NotepadStorageService'];
+    function NotepadController($scope, $mdDialog, $mdMedia, $mdSidenav, $mdToast, $state, NotepadStorageService) {
         var vm = this;
+
+        $scope.$mdMedia = $mdMedia;
 
         vm.notes = null;
         vm.index = 0;
         vm.note = null;
 
         vm.noteIsEmpty = true;
-        vm.isScreenXs = $mdMedia('xs');
-        vm.isScreenSm = $mdMedia('sm');
 
         activate();
 
@@ -23,7 +23,7 @@
             vm.notes = NotepadStorageService.getNotes();
             vm.note = vm.notes[0];
             checkNoteIsEmpty();
-        };
+        }
 
         function showToast(text, type) {
             $mdToast.show(
@@ -33,7 +33,7 @@
                     .hideDelay(6000)
                     .toastClass(type)
             );
-        };
+        }
 
         function checkNoteIsEmpty() {
             if (vm.note.data === '') {
@@ -42,20 +42,20 @@
             else {
                 vm.noteIsEmpty = false;
             }
-        };
+        }
 
         function storeNotes() {
             var storeResult = NotepadStorageService.setNotes(vm.notes);
             if (!storeResult) {
                 showToast('Was not able to save notes', 'error');
             }
-        };
+        }
 
         function saveNotes() {
             checkNoteIsEmpty();
             vm.notes[vm.index] = vm.note;
             storeNotes();
-        };
+        }
 
         vm.toggleList = function () {
             $mdSidenav('left').toggle();
@@ -144,6 +144,6 @@
 
         vm.exit = function () {
             $state.go('setup');
-        }
+        };
     }
 })();

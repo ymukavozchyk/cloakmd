@@ -1,0 +1,21 @@
+<md-toolbar layout="row" layout-align="center center">
+    <div layout="row" layout-align="center center">
+        <a class="logo-link" ui-sref="notepad">CloakMD</a>
+    </div>
+</md-toolbar>
+
+
+<div flex layout="row">
+
+    <div flex layout="column">
+
+        <md-content class="content" flex>
+
+            <div layout="row" layout-sm="column" layout-xs="column">
+                <div layout-fill class="md-whiteframe-1dp markdown-body about-md" flex markdown-to-html="vm.data"></div>
+            </div>
+
+        </md-content>
+
+    </div>
+</div>

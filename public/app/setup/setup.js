@@ -8,11 +8,11 @@
     SetupController.$inject = ['NotepadStorageService', 'SharedStorageService', 'CredentialService', '$state', '$mdToast'];
     function SetupController(NotepadStorageService, SharedStorageService, CredentialService, $state, $mdToast) {
         var vm = this;
-        var areNotesPresent = false;
 
         vm.title = 'Unlock Notepad';
         vm.password = null;
         vm.isResetNotepad = false;
+        vm.areNotesPresent = false;
 
         activate();
 
@@ -20,11 +20,11 @@
             CredentialService.reset();
             NotepadStorageService.reset();
             SharedStorageService.reset();
-            areNotesPresent = NotepadStorageService.areNotesPresent();
-            if (!areNotesPresent) {
+            vm.areNotesPresent = NotepadStorageService.areNotesPresent();
+            if (!vm.areNotesPresent) {
                 vm.title = 'Setup Notepad';
             }
-        };
+        }
 
         function showToast(text, type) {
             $mdToast.show(
@@ -34,10 +34,10 @@
                     .hideDelay(6000)
                     .toastClass(type)
             );
-        };
+        }
 
         function setupNotepad() {
-            if (areNotesPresent) {
+            if (vm.areNotesPresent) {
                 if (vm.isResetNotepad) {
                     NotepadStorageService.resetStorage();
                     return true;
@@ -56,7 +56,7 @@
             else {
                 return true;
             }
-        };
+        }
 
         function setupSharedNotes() {
             if (SharedStorageService.areNotesPresent()) {
@@ -71,7 +71,7 @@
                     }
                 }
             }
-        };
+        }
 
         vm.proceed = function () {
             CredentialService.setPassword(vm.password);
@@ -81,5 +81,5 @@
                 $state.go('notepad');
             }
         };
-    };
+    }
 })();

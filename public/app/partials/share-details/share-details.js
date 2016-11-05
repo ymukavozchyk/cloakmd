@@ -1,4 +1,4 @@
-(function () {
+(function() {
     'use strict';
 
     angular
@@ -9,7 +9,9 @@
     function ShareDetailsController(ApiService, SharedStorageService, $mdDialog, $mdToast, sharedNoteId) {
         var vm = this;
 
-        vm.sharedNoteLink = window.location.protocol + '//' + window.location.hostname + '#/shared/' + sharedNoteId;
+        vm.sharedNoteLink = window.location.protocol +
+            '//' + window.location.hostname + ':' + window.location.port +
+            '#/read/' + sharedNoteId;
 
         function showToast(text, type) {
             $mdToast.show(
@@ -19,20 +21,20 @@
                     .hideDelay(6000)
                     .toastClass(type)
             );
-        };
+        }
 
-        vm.closeDialog = function () {
+        vm.closeDialog = function() {
             $mdDialog.cancel();
         };
 
-        vm.destroyNote = function () {
+        vm.destroyNote = function() {
             ApiService.destroy(sharedNoteId)
-                .success(function () {
+                .then(function() {
                     SharedStorageService.removeNote(sharedNoteId);
                     $mdDialog.hide();
-                })
-                .error(function (e) {
-                    showToast(e.Message, 'error');
+                },
+                function(e) {
+                    showToast(e.data.Message, 'error');
                 });
         };
     }

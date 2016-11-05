@@ -5,8 +5,8 @@
         .module('app.core')
         .service('SharedStorageService', SharedStorageService);
 
-    SharedStorageService.$inject = ['localStorageService', 'CredentialService', 'LS_SHARED_COLLECTION'];
-    function SharedStorageService(localStorageService, CredentialService, LS_SHARED_COLLECTION) {
+    SharedStorageService.$inject = ['CredentialService', 'SjclService', 'LS_SHARED_COLLECTION'];
+    function SharedStorageService(CredentialService, SjclService, LS_SHARED_COLLECTION) {
 
         var encryptedSharedNotes = null;
         var sharedNotes = [];
@@ -28,39 +28,39 @@
         function reset() {
             encryptedSharedNotes = null;
             sharedNotes = [];
-        };
+        }
 
         function resetStorage() {
-            localStorageService.remove(LS_SHARED_COLLECTION);
-        };
+            localStorage.removeItem(LS_SHARED_COLLECTION);
+        }
 
         function areNotesPresent() {
-            encryptedSharedNotes = localStorageService.get(LS_SHARED_COLLECTION);
+            encryptedSharedNotes = localStorage.getItem(LS_SHARED_COLLECTION);
             if (encryptedSharedNotes !== null) {
                 return true;
             }
             return false;
-        };
+        }
 
         function decryptNotes() {
             try {
-                var decrypted = sjcl.decrypt(CredentialService.getPassword(), encryptedSharedNotes);
+                var decrypted = SjclService.decrypt(CredentialService.getPassword(), encryptedSharedNotes);
                 sharedNotes = angular.fromJson(decrypted);
                 return true;
             }
             catch (e) {
                 return false;
             }
-        };
+        }
 
         function getNotes() {
             return sharedNotes;
-        };
+        }
 
         function addNote(note) {
             sharedNotes.push(note);
             return encryptNotes();
-        };
+        }
 
         function removeNote(noteId){
             var tempNotes = [];
@@ -71,13 +71,13 @@
             });
             sharedNotes = tempNotes;
             return encryptNotes();
-        };
+        }
 
         function encryptNotes(){
             try {
                 var jsonData = angular.toJson(sharedNotes);
-                var encrypted = sjcl.encrypt(CredentialService.getPassword(), jsonData);
-                localStorageService.set(LS_SHARED_COLLECTION, encrypted);
+                var encrypted = SjclService.encrypt(CredentialService.getPassword(), jsonData);
+                localStorage.setItem(LS_SHARED_COLLECTION, encrypted);
                 return true;
             }
             catch (e) {

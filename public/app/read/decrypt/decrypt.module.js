@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.notepad.share',
+        .module('app.read.decrypt',
         [
             'ngMaterial',
             'ngMessages'

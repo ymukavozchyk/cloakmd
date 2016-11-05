@@ -2,11 +2,11 @@
     'use strict';
 
     angular
-        .module('app.share')
+        .module('app.notepad.share')
         .controller('ShareController', ShareController);
 
-    ShareController.$inject = ['ApiService', 'SharedStorageService', '$mdDialog', '$mdToast', 'noteToShare'];
-    function ShareController(ApiService, SharedStorageService, $mdDialog, $mdToast, noteToShare, event) {
+    ShareController.$inject = ['ApiService', 'SharedStorageService', 'SjclService', '$mdDialog', '$mdToast', 'noteToShare', 'event'];
+    function ShareController(ApiService, SharedStorageService, SjclService, $mdDialog, $mdToast, noteToShare, event) {
         var vm = this;
 
         vm.password = '';
@@ -23,9 +23,9 @@
                     .hideDelay(6000)
                     .toastClass(type)
             );
-        };
+        }
 
-        function openDetailsDialog(sharedNoteId){
+        function openDetailsDialog(sharedNoteId) {
             $mdDialog.show({
                 templateUrl: 'app/partials/share-details/share-details.html',
                 targetEvent: event,
@@ -33,9 +33,9 @@
                 locals: {
                     sharedNoteId: sharedNoteId
                 },
-                clickOutsideToClose : true
+                clickOutsideToClose: true
             });
-        };
+        }
 
         vm.closeDialog = function () {
             $mdDialog.cancel();
@@ -46,24 +46,24 @@
             vm.controlsDisabled = true;
             try {
                 var jsonData = angular.toJson(noteToShare);
-                var encryptedData = sjcl.encrypt(vm.password, jsonData);
+                var encryptedData = SjclService.encrypt(vm.password, jsonData);
                 var shareData = {
                     Data: encryptedData,
                     DestroyAfterReading: vm.destroyAfterReading
                 };
 
                 ApiService.share(shareData)
-                    .success(function (sharedId) {
+                    .then(function (res) {
                         SharedStorageService.addNote({
                             data: noteToShare.data,
                             title: noteToShare.title,
-                            id: sharedId
+                            id: res.data
                         });
-                        openDetailsDialog(sharedId);
+                        openDetailsDialog(res.data);
                         $mdDialog.cancel();
-                    })
-                    .error(function (e) {
-                        showToast(e, 'error');
+                    },
+                    function (e) {
+                        showToast(e.data.Message, 'error');
                     });
             }
             catch (e) {

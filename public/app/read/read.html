@@ -1,0 +1,44 @@
+<md-toolbar layout="row" layout-align="center center">
+	<div layout="row" layout-align="center center">
+		<a class="logo-link" ui-sref="notepad">CloakMD</a>
+	</div>
+</md-toolbar>
+
+<div flex layout="row">
+
+	<div flex layout="column">
+
+		<div layout="row" layout-sm="column" layout-align="center center" ng-hide="vm.hideLoader" flex>
+			<md-progress-circular md-mode="indeterminate" md-diameter="70"></md-progress-circular>
+		</div>
+
+		<md-content class="content" ng-hide="vm.hideContent" flex>
+
+			<div layout="row">
+				<span flex></span>
+				<md-input-container class="md-block" flex="70">
+					<label>Title</label>
+					<input ng-model="vm.note.title" readonly>
+				</md-input-container>
+				<span flex></span>
+			</div>
+
+			<div layout="row" layout-sm="column" layout-xs="column">
+				<div layout-fill class="md-whiteframe-1dp markdown-body" flex markdown-to-html="vm.note.data"></div>
+			</div>
+
+		</md-content>
+
+		<div layout="row" layout-align="center center" ng-show="vm.showError" flex>
+			<div>
+				<h3 class="warning-text">
+					<md-icon md-svg-icon="warning" class="warning-icon"></md-icon>
+					{{ vm.errorMessage }}
+				</h3>
+			</div>
+		</div>
+
+		<div ng-include="'app/partials/footer/footer.html'"></div>
+
+	</div>
+</div>

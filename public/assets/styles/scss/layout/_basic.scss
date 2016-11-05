@@ -1,6 +1,6 @@
 html, body {
-  font-size:14px;
-  height:100%;
+  font-size: 14px;
+  height: 100%;
   margin: 0px;
   padding: 0px;
 }
@@ -26,4 +26,53 @@ md-toast {
       color: white;
     }
   }
+}
+
+.buttons_stacked {
+  margin-bottom: 40px;
+}
+
+.basic-footer {
+  border-top: 1px solid #ddd;
+  & a{
+    margin-right: 10px;
+  }
+}
+
+.setup-footer{
+  background-color: #e6e6e6;
+  & a{
+    margin-right: 10px;
+  }
+}
+
+.link {
+    color: #265C83;
+    text-decoration: none;
+
+    &:link, &:visited {
+      color: #265C83;
+    }
+
+    &:hover, &:active{
+      color: #007BE6;
+    }
+}
+
+.neutral-warning-text{
+  text-align: center;
+  color: #757575;
+}
+
+.warning-text {
+  text-align: center;
+  color: #f44336;
+}
+
+.warning-icon svg {
+  fill: #f44336;
+}
+
+.about-md{
+  margin-top: 50px;
 }
