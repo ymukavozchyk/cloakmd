@@ -17,7 +17,6 @@
         ])
         .config(function ($mdIconProvider) {
             $mdIconProvider
-                .icon('show_notes', './assets/images/svg/show_notes.svg', 24)
                 .icon('exit', './assets/images/svg/exit.svg', 24)
                 .icon('add', './assets/images/svg/add.svg', 24)
                 .icon('remove', './assets/images/svg/remove.svg', 24)
