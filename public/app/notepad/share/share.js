@@ -5,8 +5,10 @@
         .module('app.notepad.share')
         .controller('ShareController', ShareController);
 
-    ShareController.$inject = ['ApiService', 'SharedStorageService', 'SjclService', '$mdDialog', '$mdToast', 'noteToShare', 'event'];
-    function ShareController(ApiService, SharedStorageService, SjclService, $mdDialog, $mdToast, noteToShare, event) {
+    ShareController.$inject = ['ApiService', 'SharedStorageService', 'SjclService',
+        '$mdDialog', '$mdToast', 'noteToShare', 'event'];
+    function ShareController(ApiService, SharedStorageService, SjclService,
+        $mdDialog, $mdToast, noteToShare, event) {
         var vm = this;
 
         vm.password = '';

@@ -7,13 +7,6 @@
 
     NotepadStorageService.$inject = ['SjclService', 'CredentialService', 'LS_NOTEPAD_COLLECTION'];
     function NotepadStorageService(SjclService, CredentialService, LS_NOTEPAD_COLLECTION) {
-        var sampleData =
-            '# CloakMD\n' +
-            'GitHub flavored markdown notes with a twist\n';
-        var sampleNotes = [{
-            title: 'Untitled',
-            data: sampleData
-        }];
 
         var localStorageData = null;
         var notes = null;
@@ -62,10 +55,7 @@
         }
 
         function getNotes() {
-            if (notes !== null) {
-                return notes;
-            }
-            return sampleNotes;
+            return notes;
         }
 
         function decryptNotes() {

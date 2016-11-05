@@ -1,12 +1,12 @@
 {
   "name": "cloakmd",
-  "description": "GitHub flavored markdown encrypted notes",
+  "description": "GitHub flavored markdown notes notes with client-side encryption",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/ymukavozchyk/cloakmd"
   },
-  "version": "0.0.1",
+  "version": "1.0.0",
   "dependencies": {
     "express": "*",
     "compression": "*",

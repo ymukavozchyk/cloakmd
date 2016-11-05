@@ -5,8 +5,10 @@
         .module('app.notepad')
         .controller('NotepadController', NotepadController);
 
-    NotepadController.$inject = ['$scope', '$mdDialog', '$mdMedia', '$mdSidenav', '$mdToast', '$state', 'NotepadStorageService'];
-    function NotepadController($scope, $mdDialog, $mdMedia, $mdSidenav, $mdToast, $state, NotepadStorageService) {
+    NotepadController.$inject = ['$scope', '$mdDialog', '$mdMedia', '$mdSidenav',
+        '$mdToast', '$state', 'NotepadStorageService', 'InternalService'];
+    function NotepadController($scope, $mdDialog, $mdMedia, $mdSidenav,
+        $mdToast, $state, NotepadStorageService, InternalService) {
         var vm = this;
 
         $scope.$mdMedia = $mdMedia;
@@ -21,6 +23,26 @@
 
         function activate() {
             vm.notes = NotepadStorageService.getNotes();
+            if (vm.notes === null) {
+                InternalService.getAbout()
+                    .then(setDefaultNotes, setDefaultNotes)
+                    .then(function () {
+                        selectFirstNote();
+                    });
+            }
+            else {
+                selectFirstNote();
+            }
+        }
+
+        function setDefaultNotes(res) {
+            vm.notes = [{
+                title: 'About CloakMD',
+                data: res.data
+            }];
+        }
+
+        function selectFirstNote() {
             vm.note = vm.notes[0];
             checkNoteIsEmpty();
         }

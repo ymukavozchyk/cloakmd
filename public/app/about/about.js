@@ -5,9 +5,20 @@
         .module('app.about')
         .controller('AboutController', AboutController);
 
-    function AboutController() {
+    AboutController.$inject = ['InternalService'];
+    function AboutController(InternalService) {
         var vm = this;
 
-        vm.data = '#About CloakMD';
+        vm.data = '';
+
+        activate();
+
+        function activate(){
+            InternalService.getAbout().then(setAboutData, setAboutData);
+        }
+
+        function setAboutData(res){
+            vm.data = res.data;
+        }
     }
 })();

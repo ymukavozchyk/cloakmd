@@ -5,8 +5,10 @@
         .module('app.shared')
         .controller('SharedController', SharedController);
 
-    SharedController.$inject = ['$scope', '$mdDialog', '$mdMedia', '$mdSidenav', '$mdToast', '$state', 'SharedStorageService'];
-    function SharedController($scope, $mdDialog, $mdMedia, $mdSidenav, $mdToast, $state, SharedStorageService) {
+    SharedController.$inject = ['$scope', '$mdDialog', '$mdMedia', '$mdSidenav',
+        '$mdToast', '$state', 'SharedStorageService'];
+    function SharedController($scope, $mdDialog, $mdMedia, $mdSidenav,
+        $mdToast, $state, SharedStorageService) {
         var vm = this;
 
         $scope.$mdMedia = $mdMedia;

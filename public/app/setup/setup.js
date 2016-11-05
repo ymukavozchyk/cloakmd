@@ -5,8 +5,10 @@
         .module('app.setup')
         .controller('SetupController', SetupController);
 
-    SetupController.$inject = ['NotepadStorageService', 'SharedStorageService', 'CredentialService', '$state', '$mdToast'];
-    function SetupController(NotepadStorageService, SharedStorageService, CredentialService, $state, $mdToast) {
+    SetupController.$inject = ['NotepadStorageService', 'SharedStorageService',
+        'CredentialService', '$state', '$mdToast'];
+    function SetupController(NotepadStorageService, SharedStorageService,
+        CredentialService, $state, $mdToast) {
         var vm = this;
 
         vm.title = 'Unlock Notepad';
@@ -76,7 +78,7 @@
         vm.proceed = function () {
             CredentialService.setPassword(vm.password);
             var setupNotepadResult = setupNotepad();
-            if (setupNotepadResult){
+            if (setupNotepadResult) {
                 setupSharedNotes();
                 $state.go('notepad');
             }
