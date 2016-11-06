@@ -16,7 +16,7 @@
         }
 
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-            if (toState.name === 'notepad' || toState.name === 'shared') {
+            if (toState.data.protected) {
                 if (!CredentialService.isPasswordPresent()) {
                     event.preventDefault();
                     $state.go('setup');

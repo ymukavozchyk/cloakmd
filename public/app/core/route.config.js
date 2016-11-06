@@ -15,7 +15,8 @@
                 controller: 'SetupController',
                 controllerAs: 'vm',
                 data: {
-                    title: 'Setup'
+                    title: 'Setup',
+                    protected: false
                 }
             })
             .state('notepad', {
@@ -24,7 +25,8 @@
                 controller: 'NotepadController',
                 controllerAs: 'vm',
                 data: {
-                    title: 'Notepad'
+                    title: 'Notepad',
+                    protected: true
                 }
             })
             .state('shared', {
@@ -33,7 +35,8 @@
                 controller: 'SharedController',
                 controllerAs: 'vm',
                 data: {
-                    title: 'Shared Notes'
+                    title: 'Shared Notes',
+                    protected: true
                 }
             })
             .state('read', {
@@ -42,7 +45,8 @@
                 controller: 'ReadController',
                 controllerAs: 'vm',
                 data: {
-                    title: 'Read Note'
+                    title: 'Read Note',
+                    protected: false
                 }
             })
             .state('about', {
@@ -51,7 +55,8 @@
                 controller: 'AboutController',
                 controllerAs: 'vm',
                 data: {
-                    title: 'About'
+                    title: 'About',
+                    protected: false
                 }
             });
     }
