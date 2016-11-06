@@ -50,7 +50,8 @@
                 locals: {
                     sharedNoteId: vm.note.id
                 },
-                clickOutsideToClose: true
+                clickOutsideToClose: false,
+                escapeToClose: false
             })
                 .then(function () {
                     vm.notes.splice(vm.index, 1);

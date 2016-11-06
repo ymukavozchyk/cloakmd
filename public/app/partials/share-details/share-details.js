@@ -28,6 +28,7 @@
         };
 
         vm.destroyNote = function() {
+            //todo loader bar
             ApiService.destroy(sharedNoteId)
                 .then(function() {
                     SharedStorageService.removeNote(sharedNoteId);

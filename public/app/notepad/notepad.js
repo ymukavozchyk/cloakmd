@@ -98,7 +98,8 @@
                     noteToShare: vm.note,
                     event: ev
                 },
-                clickOutsideToClose: true
+                clickOutsideToClose: false,
+                escapeToClose: false
             });
         };
 

@@ -56,7 +56,9 @@
                 controller: 'DecryptController as vm',
                 locals: {
                     noteToDecrypt: encryptedNote
-                }
+                },
+                clickOutsideToClose: false,
+                escapeToClose: false
             })
                 .then(function(decryptedNote) {
                     vm.note = decryptedNote;

@@ -35,7 +35,8 @@
                 locals: {
                     sharedNoteId: sharedNoteId
                 },
-                clickOutsideToClose: true
+                clickOutsideToClose: false,
+                escapeToClose: false
             });
         }
 
