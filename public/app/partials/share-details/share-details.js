@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -13,6 +13,9 @@
             '//' + window.location.hostname + ':' + window.location.port +
             '#/read/' + sharedNoteId;
 
+        vm.hideProgressBar = true;
+        vm.controlsDisabled = false;
+
         function showToast(text, type) {
             $mdToast.show(
                 $mdToast.simple()
@@ -23,18 +26,22 @@
             );
         }
 
-        vm.closeDialog = function() {
+        vm.closeDialog = function () {
             $mdDialog.cancel();
         };
 
-        vm.destroyNote = function() {
-            //todo loader bar
+        vm.destroyNote = function () {
+            vm.hideProgressBar = false;
+            vm.controlsDisabled = true;
+
             ApiService.destroy(sharedNoteId)
-                .then(function() {
+                .then(function () {
                     SharedStorageService.removeNote(sharedNoteId);
                     $mdDialog.hide();
                 },
-                function(e) {
+                function (e) {
+                    vm.hideProgressBar = true;
+                    vm.controlsDisabled = false;
                     showToast(e.data.Message, 'error');
                 });
         };

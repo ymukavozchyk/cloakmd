@@ -7,16 +7,17 @@
 	<md-content layout-padding>
 
 		<div>
+			<md-progress-linear md-mode="query" ng-hide='vm.hideProgressBar'></md-progress-linear>
 			<p>Link to the shared note</p>
 			<a target="_blank" ng-href="{{ vm.sharedNoteLink }}">{{ vm.sharedNoteLink }}</a>
 		</div>
 
 		<div layout="row">
-			<md-button aria-label="Cancel" class="md-raised" ng-click="vm.closeDialog()">
+			<md-button aria-label="Cancel" class="md-raised" ng-disabled="vm.controlsDisabled" ng-click="vm.closeDialog()">
 				Cancel
 			</md-button>
 			<span flex></span>
-			<md-button aria-label="Stop sharing" class="md-raised md-warn" ng-click="vm.destroyNote()">
+			<md-button aria-label="Stop sharing" class="md-raised md-warn" ng-disabled="vm.controlsDisabled" ng-click="vm.destroyNote()">
 				Stop Sharing
 			</md-button>
 		</div>
