@@ -15,6 +15,7 @@
         activate();
 
         function activate(){
+            //pulls README.md from the backend
             InternalService.getAbout().then(setAboutData, setAboutData);
         }
 

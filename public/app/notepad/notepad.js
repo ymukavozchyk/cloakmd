@@ -5,23 +5,34 @@
         .module('app.notepad')
         .controller('NotepadController', NotepadController);
 
+    //main controller of the app
     NotepadController.$inject = ['$scope', '$mdDialog', '$mdMedia', '$mdSidenav',
         '$mdToast', '$state', 'NotepadStorageService', 'InternalService'];
     function NotepadController($scope, $mdDialog, $mdMedia, $mdSidenav,
         $mdToast, $state, NotepadStorageService, InternalService) {
+
         var vm = this;
 
+        //workaround to use mdMedia in view
         $scope.$mdMedia = $mdMedia;
 
+        //notes array
         vm.notes = null;
+
+        //active note's index relative to vm.notes
         vm.index = 0;
+
+        //avtive note object
         vm.note = null;
 
+        //flags
         vm.noteIsEmpty = true;
         vm.hideLoader = false;
 
         activate();
 
+        /* loads notes from local storage and if there are none,
+        fetches default note (README.md) as the first and only note */
         function activate() {
             vm.notes = NotepadStorageService.getNotes();
             if (vm.notes === null) {
@@ -36,6 +47,7 @@
             }
         }
 
+        //resolving promise of fetching default note
         function setDefaultNotes(res) {
             vm.notes = [{
                 title: 'About CloakMD',
@@ -43,12 +55,14 @@
             }];
         }
 
+        //making first note in the notepad active
         function selectFirstNote() {
             vm.note = vm.notes[0];
             checkNoteIsEmpty();
             vm.hideLoader = true;
         }
 
+        //wrapper for showing mdToast
         function showToast(text, type) {
             $mdToast.show(
                 $mdToast.simple()
@@ -59,6 +73,8 @@
             );
         }
 
+        /* checks if content of active note is empty
+        and sets the flag */
         function checkNoteIsEmpty() {
             if (vm.note.data === '') {
                 vm.noteIsEmpty = true;
@@ -68,6 +84,7 @@
             }
         }
 
+        //stores notes to the local storage
         function storeNotes() {
             var storeResult = NotepadStorageService.setNotes(vm.notes);
             if (!storeResult) {
@@ -75,26 +92,26 @@
             }
         }
 
+        //implements auto-save
         function saveNotes() {
             checkNoteIsEmpty();
             vm.notes[vm.index] = vm.note;
             storeNotes();
         }
 
+        //opens sidenav (applicable only to the mobile version)
         vm.toggleList = function () {
             $mdSidenav('left').toggle();
         };
 
-        vm.openMenu = function ($mdOpenMenu, ev) {
-            $mdOpenMenu(ev);
-        };
-
+        //opens the dialog for sharing the note
         vm.openSharingDialog = function (ev) {
             $mdDialog.show({
                 templateUrl: 'app/notepad/share/share.html',
                 targetEvent: ev,
                 controller: 'ShareController as vm',
                 locals: {
+                    //passing selected for sharing note along with parent event
                     noteToShare: vm.note,
                     event: ev
                 },
@@ -103,6 +120,7 @@
             });
         };
 
+        //configuration of Ace editor
         vm.aceLoaded = function (editor) {
             var session = editor.getSession();
             var renderer = editor.renderer;
@@ -123,14 +141,17 @@
             editor.focus();
         };
 
+        //auto-save notes on editor changed event        
         vm.aceChanged = function () {
             saveNotes();
         };
 
+        //auto-save notes on title changed event
         vm.titleChanged = function () {
             saveNotes();
         };
 
+        //prevents from having a note with blank title
         vm.titleBlur = function () {
             if (vm.note.title === '') {
                 vm.note.title = 'Untitled';
@@ -138,6 +159,7 @@
             }
         };
 
+        //adds new note and makes it active
         vm.addNewNote = function () {
             var newNote = {
                 title: 'Untitled',
@@ -150,17 +172,20 @@
             checkNoteIsEmpty();
         };
 
+        //removes active note and saves changes in local storage
         vm.removeCurrentNote = function () {
             vm.notes.splice(vm.index, 1);
             if (vm.notes.length > 0) {
                 vm.selectNote(vm.notes[vm.notes.length - 1]);
             }
+            //if it was a last note, creates a blank one
             else {
                 vm.addNewNote();
             }
             saveNotes();
         };
 
+        //changes active note
         vm.selectNote = function (note) {
             vm.index = vm.notes.indexOf(note);
             vm.note = note;

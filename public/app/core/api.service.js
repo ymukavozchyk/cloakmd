@@ -5,7 +5,8 @@
         .module('app.core')
         .service('ApiService', ApiService);
 
-    ApiService.$inject = ['$http', 'API_URL'];
+    //service which consumes application's API
+    ApiService.$inject = ['$http', 'API_URL'];    
     function ApiService($http, API_URL) {
         var service = {
             share: shareNote,

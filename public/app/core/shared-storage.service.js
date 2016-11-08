@@ -5,6 +5,8 @@
         .module('app.core')
         .service('SharedStorageService', SharedStorageService);
 
+    
+    //service for handling shared notes
     SharedStorageService.$inject = ['CredentialService', 'SjclService', 'LS_SHARED_COLLECTION'];
     function SharedStorageService(CredentialService, SjclService, LS_SHARED_COLLECTION) {
 
@@ -34,6 +36,7 @@
             localStorage.removeItem(LS_SHARED_COLLECTION);
         }
 
+        //checks if notes are present in local storage and fetches them
         function areNotesPresent() {
             encryptedSharedNotes = localStorage.getItem(LS_SHARED_COLLECTION);
             if (encryptedSharedNotes !== null) {

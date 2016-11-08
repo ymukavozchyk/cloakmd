@@ -5,6 +5,7 @@
         .module('app.core')
         .service('NotepadStorageService', NotepadStorageService);
 
+    //service for handling active notes
     NotepadStorageService.$inject = ['SjclService', 'CredentialService', 'LS_NOTEPAD_COLLECTION'];
     function NotepadStorageService(SjclService, CredentialService, LS_NOTEPAD_COLLECTION) {
 
@@ -33,6 +34,7 @@
             localStorage.removeItem(LS_NOTEPAD_COLLECTION);
         }
 
+        //checks if notes are present in local storage and fetches them
         function areNotesPresent() {
             localStorageData = localStorage.getItem(LS_NOTEPAD_COLLECTION);
             if (localStorageData !== null) {
@@ -41,6 +43,8 @@
             return false;
         }
 
+        /* update local var with notes, encrypt them,
+        and store in the local storage */
         function setNotes(data) {
             notes = data;
             try {

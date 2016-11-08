@@ -5,6 +5,7 @@
         .module('app.core')
         .service('CredentialService', CredentialService);
 
+    //service for handling notepad's master password
     function CredentialService() {
         var password = null;
 
