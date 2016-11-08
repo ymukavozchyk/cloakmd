@@ -20,7 +20,7 @@
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             //check if master password is present when accessing protected state
             if (toState.data.protected === true) {
-                if (!CredentialService.isPasswordPresent() === true) {
+                if (CredentialService.isPasswordPresent() !== true) {
                     event.preventDefault();
                     $state.go('setup');
                 }
