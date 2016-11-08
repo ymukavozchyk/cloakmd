@@ -14,14 +14,13 @@
 
         activate();
 
-        function activate(){
+        function activate() {
             //pulls README.md from the backend
-            InternalService.getAbout().then(setAboutData, setAboutData);
-        }
-
-        function setAboutData(res){
-            vm.data = res.data;
-            vm.hideLoader = true;
+            InternalService.getAbout()
+                .then(function (res) {
+                    vm.data = res.data;
+                    vm.hideLoader = true;
+                });
         }
     }
 })();

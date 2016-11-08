@@ -9,7 +9,10 @@
     NotepadStorageService.$inject = ['SjclService', 'CredentialService', 'LS_NOTEPAD_COLLECTION'];
     function NotepadStorageService(SjclService, CredentialService, LS_NOTEPAD_COLLECTION) {
 
+        //encrypted notes from the local storage
         var localStorageData = null;
+
+        //decrypted array of notes
         var notes = null;
 
         var service = {
@@ -34,7 +37,7 @@
             localStorage.removeItem(LS_NOTEPAD_COLLECTION);
         }
 
-        //checks if notes are present in local storage and fetches them
+        //checks if notes are present in the local storage and fetches them
         function areNotesPresent() {
             localStorageData = localStorage.getItem(LS_NOTEPAD_COLLECTION);
             if (localStorageData !== null) {

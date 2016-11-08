@@ -5,7 +5,7 @@
         .module('app.notepad')
         .controller('NotepadController', NotepadController);
 
-    //main controller of the app
+    //controller for notepad view
     NotepadController.$inject = ['$scope', '$mdDialog', '$mdMedia', '$mdSidenav',
         '$mdToast', '$state', 'NotepadStorageService', 'InternalService'];
     function NotepadController($scope, $mdDialog, $mdMedia, $mdSidenav,
@@ -13,16 +13,16 @@
 
         var vm = this;
 
-        //workaround to use mdMedia in view
+        //workaround to use mdMedia in the view
         $scope.$mdMedia = $mdMedia;
 
         //notes array
         vm.notes = null;
 
-        //active note's index relative to vm.notes
+        //active note's index relative to the vm.notes
         vm.index = 0;
 
-        //avtive note object
+        //active note object
         vm.note = null;
 
         //flags
@@ -31,8 +31,8 @@
 
         activate();
 
-        /* loads notes from local storage and if there are none,
-        fetches default note (README.md) as the first and only note */
+        /* loads notes from the service and if there are none,
+        fetches default note as the first and the only note */
         function activate() {
             vm.notes = NotepadStorageService.getNotes();
             if (vm.notes === null) {
@@ -47,7 +47,7 @@
             }
         }
 
-        //resolving promise of fetching default note
+        //resolving a promise of fetching default note
         function setDefaultNotes(res) {
             vm.notes = [{
                 title: 'About CloakMD',
@@ -73,8 +73,7 @@
             );
         }
 
-        /* checks if content of active note is empty
-        and sets the flag */
+        //checks if content of active note is empty and sets the flag
         function checkNoteIsEmpty() {
             if (vm.note.data === '') {
                 vm.noteIsEmpty = true;
@@ -87,7 +86,7 @@
         //stores notes to the local storage
         function storeNotes() {
             var storeResult = NotepadStorageService.setNotes(vm.notes);
-            if (!storeResult) {
+            if (storeResult === false) {
                 showToast('Was not able to save notes', 'error');
             }
         }
@@ -104,14 +103,14 @@
             $mdSidenav('left').toggle();
         };
 
-        //opens the dialog for sharing the note
+        //opens up the dialog for sharing note
         vm.openSharingDialog = function (ev) {
             $mdDialog.show({
                 templateUrl: 'app/notepad/share/share.html',
                 targetEvent: ev,
                 controller: 'ShareController as vm',
                 locals: {
-                    //passing selected for sharing note along with parent event
+                    //passing selected for sharing note along with the parent event
                     noteToShare: vm.note,
                     event: ev
                 },
@@ -141,7 +140,7 @@
             editor.focus();
         };
 
-        //auto-save notes on editor changed event        
+        //auto-save notes on editor changed event
         vm.aceChanged = function () {
             saveNotes();
         };
@@ -172,7 +171,7 @@
             checkNoteIsEmpty();
         };
 
-        //removes active note and saves changes in local storage
+        //removes active note and saves changes in the local storage
         vm.removeCurrentNote = function () {
             vm.notes.splice(vm.index, 1);
             if (vm.notes.length > 0) {

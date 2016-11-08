@@ -5,8 +5,7 @@
         .module('app.core')
         .service('InternalService', InternalService);
 
-    /*service for pulling sample data (README.md)
-    from the backend */
+    //service for pulling about data from the backend
     InternalService.$inject = ['$http'];
     function InternalService($http) {
         var service = {

@@ -5,12 +5,14 @@
         .module('app.read.decrypt')
         .controller('DecryptController', DecryptController);
 
+    //controller for shared note decryption dialog
     DecryptController.$inject = ['SjclService', '$mdDialog', '$mdToast', 'noteToDecrypt'];
     function DecryptController(SjclService, $mdDialog, $mdToast, noteToDecrypt) {
         var vm = this;
 
         vm.password = '';
 
+        //wrapper for mdToast
         function showToast(text, type) {
             $mdToast.show(
                 $mdToast.simple()
@@ -27,6 +29,7 @@
 
         vm.decryptNote = function () {
             try {
+                //try to decrypt and pass decrypted note for promise resolve
                 var decrypted = SjclService.decrypt(vm.password, noteToDecrypt.Data);
                 $mdDialog.hide(angular.fromJson(decrypted));
             }

@@ -11,6 +11,7 @@ app.use(morgan('dev'));
 app.use(compression());
 app.use(express.static('public'));
 
+//serves README.md file or default text in case of error
 app.get('/aboutmd', function (req, res) {
     fs.readFile('README.md', 'utf-8', function (err, data) {
         if (err) {

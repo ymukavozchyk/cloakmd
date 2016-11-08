@@ -32,7 +32,7 @@
             );
         }
 
-        //opens a dialog with details after note is shared
+        //opens up a dialog with details after note is shared
         function openDetailsDialog(sharedNoteId) {
             $mdDialog.show({
                 templateUrl: 'app/partials/share-details/share-details.html',
@@ -53,7 +53,6 @@
 
         //sharing selected note
         vm.shareNote = function () {
-            //adjusting flags
             vm.hideProgressBar = false;
             vm.controlsDisabled = true;
             try {
@@ -78,7 +77,7 @@
                             id: res.data
                         });
                         //opens up a dialog with information regarding shared note
-                        //res.data - shared note id
+                        //res.data = shared note id
                         openDetailsDialog(res.data);
                         $mdDialog.cancel();
                     },

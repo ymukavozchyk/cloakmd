@@ -5,29 +5,40 @@
         .module('app.setup')
         .controller('SetupController', SetupController);
 
+    //controller for setting up / unlocking notepad view
     SetupController.$inject = ['NotepadStorageService', 'SharedStorageService',
         'CredentialService', '$state', '$mdToast'];
     function SetupController(NotepadStorageService, SharedStorageService,
         CredentialService, $state, $mdToast) {
         var vm = this;
 
+        //dynamic block title
         vm.title = 'Unlock Notepad';
+
+        //master password
         vm.password = null;
+
+        //flags
         vm.isResetNotepad = false;
         vm.areNotesPresent = false;
 
         activate();
 
         function activate() {
+            //resets temporary data
             CredentialService.reset();
             NotepadStorageService.reset();
             SharedStorageService.reset();
+
+            /* checks if notes are in the local storage
+            and adjust the title if needed */
             vm.areNotesPresent = NotepadStorageService.areNotesPresent();
-            if (!vm.areNotesPresent) {
+            if (vm.areNotesPresent === false) {
                 vm.title = 'Setup Notepad';
             }
         }
 
+        //wrapper for mdToast
         function showToast(text, type) {
             $mdToast.show(
                 $mdToast.simple()
@@ -38,15 +49,19 @@
             );
         }
 
+        //notepad setup / unlock procedure
         function setupNotepad() {
-            if (vm.areNotesPresent) {
-                if (vm.isResetNotepad) {
+            if (vm.areNotesPresent === true) {
+                //if reset notepad flag is active
+                if (vm.isResetNotepad === true) {
+                    //wipe local storage with active notes
                     NotepadStorageService.resetStorage();
                     return true;
                 }
                 else {
+                    //try to decrypt active notes from the local storage
                     var decryptResult = NotepadStorageService.decryptNotes();
-                    if (decryptResult) {
+                    if (decryptResult === true) {
                         return true;
                     }
                     else {
@@ -60,14 +75,19 @@
             }
         }
 
+        //shared notes setup procedure
         function setupSharedNotes() {
-            if (SharedStorageService.areNotesPresent()) {
-                if (vm.isResetNotepad) {
+            if (SharedStorageService.areNotesPresent() === true) {
+                //if reset notepad flag is active
+                if (vm.isResetNotepad === true) {
+                    //wipe local storage with shared notes
                     SharedStorageService.resetStorage();
                 }
                 else {
+                    //try to decrypt shared notes from the local storage
                     var decryptResult = SharedStorageService.decryptNotes();
-                    if (!decryptResult) {
+                    //if decryption is failed, reset shared notes local storage
+                    if (decryptResult === false) {
                         SharedStorageService.reset();
                         SharedStorageService.resetStorage();
                     }
@@ -75,10 +95,10 @@
             }
         }
 
+        //sets master password and perform setup procedures
         vm.proceed = function () {
             CredentialService.setPassword(vm.password);
-            var setupNotepadResult = setupNotepad();
-            if (setupNotepadResult) {
+            if (setupNotepad() === true) {
                 setupSharedNotes();
                 $state.go('notepad');
             }
