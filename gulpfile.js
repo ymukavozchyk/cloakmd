@@ -1,3 +1,5 @@
+'use strict';
+
 var nodemon;
 var browserSync;
 var jshint;
